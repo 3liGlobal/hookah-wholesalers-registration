@@ -662,6 +662,7 @@ ul {
 .zf-fmFooter .zf-submitColor {
   font-size: 14px;
   padding: 4px 10px;
+  /* border-radius: 100px; */
 }
 
 .zf-submitColor {
@@ -679,10 +680,11 @@ ul {
   margin: 10px 5px 10px 0px;
   float: right;
   background-color: black;
+
 }
 
 .zf-submitColor:hover {
-  background: linear-gradient(275deg, #2f9eec 5%, #15baec 100%);
+  background: linear-gradient(275deg, #9b2269 5%, #d378ff 100%);
 
   border-color: transparent;
 
@@ -1323,7 +1325,7 @@ p {
 }
 
 #progressbar .active {
-  color: #4b9fc1;
+  color: #961e70;
 }
 
 #progressbar li {
@@ -1389,7 +1391,7 @@ p {
 
 #progressbar li.active:before,
 #progressbar li.active:after {
-  background: #4b9fc1;
+  background: #961e70;
 }
 
 .progress {
