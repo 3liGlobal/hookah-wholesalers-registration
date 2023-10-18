@@ -465,12 +465,12 @@
 							<div class="zf-tempContDiv zf-twoType">
 								<div class="zf-nameWrapper">
 									<span> <label class="addr">First Name <em class="zf-important">*</em></label> 
-										<input type="text" maxlength="255" name="Name_First" fieldType=7
+										<input onkeydown="return /[a-z]/i.test(event.key)" type="text" maxlength="255" name="Name_First" fieldType=7
 											placeholder="" required /> 
 									</span>
 									</span> </span>
 									<span><label class="addr">Last Name <em class="zf-important">*</em></label>  
-										 <input type="text" maxlength="255" name="Name_Last" fieldType=7
+										 <input onkeydown="return /[a-z]/i.test(event.key)" type="text" maxlength="255" name="Name_Last" fieldType=7
 											placeholder="" required /> 
 									</span>
 									</span> </span>
