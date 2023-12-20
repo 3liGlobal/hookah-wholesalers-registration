@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Hookah&#x20;Wholesalers&#x20;Corporate&#x2f;Wholesale&#x20;Application</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="css/form.css" rel="stylesheet" type="text/css">
 	<script src="js/validation.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -46,35 +45,37 @@
 				<div class="zf-subContWrap zf-topAlign">
 					<ul>
 						<!---------Section Starts Here---------->
-						<li class="zf-tempFrmWrapper zf-section">
-							<h2>Contacts</h2>
-							<p></p>
-						</li>
+
 						<!---------Section Ends Here---------->
 						<!---------Name Starts Here---------->
 						<fieldset>
+							<li class="zf-tempFrmWrapper zf-section">
+								<h2>Contacts</h2>
+								<p></p>
+							</li>
 							<li class="zf-tempFrmWrapper zf-name zf-namelarge"><label class="zf-labelName">
-									<!-- Full Name
-									<em class="zf-important">*</em> -->
+									<!-- Full Name -->
 								</label>
 								<div class="zf-tempContDiv zf-twoType">
 									<div class="zf-nameWrapper">
-										<span> <label>First Name</label>
+										<span><label>First Name</label>
 											<input type="text" maxlength="255" name="Name_First" fieldType=7
 												placeholder="" />
 										</span>
 										</span> </span>
-										<span>
-											<label>Last Name</label>
+										<span> <label>Last Name
+												<em class="zf-important">*</em>
+
+											</label>
 											<input type="text" maxlength="255" name="Name_Last" fieldType=7
 												placeholder="" />
 											<p id="Name_error" class="zf-errorMessage" style="display:none;">Invalid
 												value</p>
+
 										</span>
 										</span> </span>
 										<div class="zf-clearBoth"></div>
 									</div>
-
 								</div>
 								<div class="zf-clearBoth"></div>
 							</li><!---------Name Ends Here---------->
@@ -113,11 +114,12 @@
 									</div>
 									<div class="zf-clearBoth"></div>
 								</li>
-							</div><!---------Email Ends Here---------->
+							</div>
+							<!---------Email Ends Here---------->
 							<!---------Phone Starts Here---------->
 							<div class="name-item-2">
 								<li class="zf-tempFrmWrapper zf-large"><label class="zf-labelName">
-										Main Phone
+										Main Phone Number
 										<em class="zf-important">*</em>
 									</label>
 									<div class="zf-tempContDiv zf-phonefld">
@@ -138,7 +140,7 @@
 								</li><!---------Phone Ends Here---------->
 								<!---------Phone Starts Here---------->
 								<li class="zf-tempFrmWrapper zf-large"><label class="zf-labelName">
-										Mobile Phone
+										Mobile Phone Number
 									</label>
 									<div class="zf-tempContDiv zf-phonefld">
 										<div class="zf-phwrapper zf-phNumber">
@@ -156,7 +158,8 @@
 									</div>
 									<div class="zf-clearBoth"></div>
 								</li>
-							</div><!---------Phone Ends Here---------->
+							</div>
+							<!---------Phone Ends Here---------->
 							<!---------Section Starts Here---------->
 							<li class="zf-tempFrmWrapper zf-section">
 								<h2>Business</h2>
@@ -187,27 +190,37 @@
 										<div class="name-item-2">
 											<span class="zf-addOne"> <input type="text" maxlength="255"
 													name="Address_AddressLine1" checktype="c1" placeholder="" />
-												<label>Street Address</label>
+												<label>Street Address
+													<em class="zf-important">*</em>
+												</label>
 											</span>
 											<span class="zf-addOne"> <input type="text" maxlength="255"
 													name="Address_AddressLine2" checktype="c1" placeholder="" />
-												<label>Unit/Flat/Apartment No.</label>
+												<label>Unit/Flat/Apartment No.
+													<em class="zf-important">*</em>
+												</label>
 											</span>
 										</div>
 										<div class="name-item-2">
 											<span class="zf-flLeft zf-addtwo"> <input type="text" maxlength="255"
 													name="Address_City" checktype="c1" placeholder="" />
-												<label>City</label>
+												<label>City
+													<em class="zf-important">*</em>
+												</label>
 											</span>
 											<span class="zf-flLeft zf-addtwo"> <input type="text" maxlength="255"
 													name="Address_Region" checktype="c1" placeholder="" />
-												<label>State/Region/Province</label>
+												<label>State/Region/Province
+													<em class="zf-important">*</em>
+												</label>
 											</span>
 										</div>
 										<div class="name-item-2">
 											<span class="zf-flLeft zf-addtwo"> <input type="text" maxlength="255"
 													name="Address_ZipCode" checktype="c1" placeholder="" />
-												<label>Postal / Zip Code</label>
+												<label>Postal / Zip Code
+													<em class="zf-important">*</em>
+												</label>
 											</span>
 											<span class="zf-flLeft zf-addtwo"> <select class="zf-form-sBox"
 													name="Address_Country" checktype="c1">
@@ -481,7 +494,9 @@
 													<option>Zambia</option>
 													<option>Zimbabwe</option>
 												</select>
-												<label>Country</label>
+												<label>Country
+													<em class="zf-important">*</em>
+												</label>
 											</span>
 										</div>
 										<div class="zf-clearBoth"></div>
@@ -491,9 +506,7 @@
 									</div>
 								</div>
 								<div class="zf-eclearBoth"></div>
-							</li>
-
-							<!---------Address Ends Here---------->
+							</li><!---------Address Ends Here---------->
 							<!---------Multiple Line Starts Here---------->
 							<li class="zf-tempFrmWrapper zf-large"><label class="zf-labelName">
 									Tell us a little about your business
@@ -508,11 +521,13 @@
 							</li>
 							<input type="button" name="next" class="next action-button" value="Next"
 								onclick="zf_ValidateAndSubmit()" />
+							<!---------Multiple Line Ends Here---------->
+							<!--fileupload-->
+							<!---------File Upload Starts Here---------->
 						</fieldset>
-						<!---------Multiple Line Ends Here---------->
-						<!--fileupload-->
-						<!---------File Upload Starts Here---------->
 						<fieldset>
+							<p class="mandatory">This section is not mandatory for now.</p>
+
 							<li class="zf-tempFrmWrapper"><label class="zf-labelName">FEIN
 								</label>
 								<div class="zf-tempContDiv">
@@ -562,16 +577,13 @@
 							<input type="button" name="previous" class="previous action-button-previous"
 								value="Previous" />
 							<button class="zf-submitColor">Submit</button>
-							<!---------File Upload Ends Here---------->
 						</fieldset>
+						<!---------File Upload Ends Here---------->
 					</ul>
 				</div><!---------template Container Starts Here---------->
 				<!-- <ul>
 					<li class="zf-fmFooter"><button class="zf-submitColor">Submit</button></li>
 				</ul> -->
-
-
-
 			</div><!-- 'zf-templateWrapper' ends -->
 		</form>
 	</div><!-- 'zf-templateWidth' ends -->
@@ -580,9 +592,6 @@
 		var zf_FieldArray = ["Name_First", "Name_Last", "Dropdown", "Email", "PhoneNumber_countrycode", "PhoneNumber1_countrycode", "SingleLine", "Address_AddressLine1", "Address_AddressLine2", "Address_City", "Address_Region", "Address_ZipCode", "Address_Country", "MultiLine", "FileUpload", "FileUpload3", "FileUpload2", "FileUpload1"];
 		var isSalesIQIntegrationEnabled = false;
 		var salesIQFieldsArray = [];</script>
-	<script>
-
-	</script>
 </body>
 
 </html>
