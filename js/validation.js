@@ -1,6 +1,6 @@
 // $Id: $
 function zf_ValidateAndSubmit() {
-  if (zf_CheckMandatory() && zf_ValidCheck()) {
+  if (zf_CheckMandatory()) {
     $(document).ready(function () {
       console.log("docum");
       var current_fs, next_fs, previous_fs; //fieldsets
@@ -97,11 +97,18 @@ function zf_ValidateAndSubmit() {
       //   return false;
       // }
     });
+    if (zf_ValidCheck()) {
+      if (isSalesIQIntegrationEnabled) {
+        zf_addDataToSalesIQ();
+      }
+      return true;
+    } else {
+      return false;
+    }
   } else {
     return false;
   }
 }
-
 function zf_CheckMandatory() {
   for (i = 0; i < zf_MandArray.length; i++) {
     var fieldObj = document.forms.form[zf_MandArray[i]];
@@ -429,19 +436,5 @@ function zf_FocusNext(elem, event) {
     if (elem.value.length == 3) {
       document.getElementsByName(compname + "_second")[0].focus();
     }
-  }
-}
-
-// password match
-
-function qweasd() {
-  const password = document.querySelector("input[name=SingleLine1]");
-  const confirm = document.querySelector("input[name=SingleLine2]");
-  if (confirm.value === password.value) {
-    document.querySelector(".message").style.display = "none";
-    confirm.setCustomValidity("");
-  } else {
-    document.querySelector(".message").style.display = "block";
-    confirm.setCustomValidity(" ");
   }
 }
