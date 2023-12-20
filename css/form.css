@@ -1340,7 +1340,7 @@ ul {
 }
 
 .zf-tempFrmWrapper {
-  padding: 10px 7px;
+  padding: 10px 0px;
   margin: 1px 0;
 }
 
@@ -2613,4 +2613,11 @@ ul {
 .zf-name .zf-tempContDiv span label {
   color: #888888;
   padding-bottom: 8px;
+}
+
+.mandatory {
+  font-size: 22px;
+  color: black;
+  text-align: center;
+  margin-top: 28px;
 }
