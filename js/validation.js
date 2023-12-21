@@ -1,6 +1,6 @@
 // $Id: $
 function zf_ValidateAndSubmit() {
-  if (zf_CheckMandatory()) {
+  if (zf_CheckMandatory() && zf_ValidCheck()) {
     $(document).ready(function () {
       console.log("docum");
       var current_fs, next_fs, previous_fs; //fieldsets
@@ -97,14 +97,6 @@ function zf_ValidateAndSubmit() {
       //   return false;
       // }
     });
-    if (zf_ValidCheck()) {
-      if (isSalesIQIntegrationEnabled) {
-        zf_addDataToSalesIQ();
-      }
-      return true;
-    } else {
-      return false;
-    }
   } else {
     return false;
   }
