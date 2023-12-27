@@ -1,6 +1,6 @@
 // $Id: $
 function zf_ValidateAndSubmit() {
-  if (zf_CheckMandatory() && zf_ValidCheck()) {
+  if (zf_CheckMandatory() && zf_ValidCheck() && doubleCheck()) {
     $(document).ready(function () {
       console.log("docum");
       var current_fs, next_fs, previous_fs; //fieldsets
@@ -152,10 +152,55 @@ function zf_CheckMandatory() {
   }
   return true;
 }
+
+function doubleCheck() {
+  var field1 = document.getElementById(
+    "international_PhoneNumber_countrycode"
+  ).value;
+  var field2 = document.getElementById(
+    "international_PhoneNumber1_countrycode"
+  ).value;
+
+  var focus = document.forms.form[arrayCode[0]];
+
+  // var PhoneNumber_error = document.getElementById("PhoneNumber_error");
+  // var PhoneNumber1_error = document.getElementById("PhoneNumber1_error");
+
+  if (field1.length || field2.length) {
+    PhoneNumber_error.style.display = "none";
+    return true;
+  } else {
+    focus.focus();
+    zf_ShowErrorMsg1(arrayCode[0]);
+    // PhoneNumber_error.style.display = "block";
+    return false;
+  }
+  // else if (
+  //   !fieldObj.name === "PhoneNumber_countrycode".length ||
+  //   !fieldObj.name === "PhoneNumber1_countrycode".length
+  // ) {
+  //   fieldObj.focus();
+  //   zf_ShowErrorMsg(zf_MandArray[i]);
+  //   return false;
+  // }
+}
+
+function zf_ShowErrorMsg1(uniqName) {
+  var fldLinkName;
+  for (errInd = 0; errInd < zf_FieldArray.length; errInd++) {
+    fldLinkName = zf_FieldArray[errInd].split("_")[0];
+    document.getElementById(fldLinkName + "_error").style.display = "none";
+  }
+  var linkName = uniqName.split("_")[0];
+  console.log(linkName);
+  document.getElementById(linkName + "_error").style.display = "block";
+}
+
 function zf_ValidCheck() {
   var isValid = true;
   for (ind = 0; ind < zf_FieldArray.length; ind++) {
     var fieldObj = document.forms.form[zf_FieldArray[ind]];
+
     if (fieldObj) {
       if (fieldObj.nodeName != null) {
         var checkType = fieldObj.getAttribute("checktype");
@@ -203,6 +248,15 @@ function zf_ValidCheck() {
             return false;
           }
         } else if (checkType == "c7") {
+          // if (
+          //   !fieldObj.name === "PhoneNumber_countrycode".length ||
+          //   !fieldObj.name === "PhoneNumber1_countrycode".length
+          // ) {
+          //   isValid = false;
+          //   fieldObj.focus();
+          //   zf_ShowErrorMsg(zf_FieldArray[ind]);
+          //   return false;
+          // }
           // No I18N
           if (!zf_ValidatePhone(fieldObj)) {
             isValid = false;
@@ -226,6 +280,7 @@ function zf_ShowErrorMsg(uniqName) {
     document.getElementById(fldLinkName + "_error").style.display = "none";
   }
   var linkName = uniqName.split("_")[0];
+  console.log(linkName);
   document.getElementById(linkName + "_error").style.display = "block";
 }
 function zf_ValidateNumber(elem) {
@@ -325,6 +380,7 @@ function zf_ValidateLiveUrl(elem) {
   }
   return true;
 }
+
 function zf_ValidatePhone(inpElem) {
   var ZFPhoneRegex = {
     PHONE_INTE_ALL_REG: /^[+]{0,1}[()0-9-. ]+$/,
