@@ -5,7 +5,8 @@
 	<title>Hookah&#x20;Wholesalers&#x20;Corporate&#x2f;Wholesale&#x20;Application</title>
 	<link href="css/form.css" rel="stylesheet" type="text/css">
 	<script src="js/validation.js"></script>
-	<script src="js/countries-states.js"></script>
+	<script src="js/state.js"></script>
+	<script src="js/texting.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
@@ -54,7 +55,8 @@
 								<h2>Contacts</h2>
 								<p></p>
 							</li>
-							<li class="zf-tempFrmWrapper zf-name zf-namelarge"><label class="zf-labelName">
+							<li class="zf-tempFrmWrapper zf-name zf-namelarge">
+								<label class="zf-labelName">
 									<!-- Full Name -->
 								</label>
 								<div class="zf-tempContDiv zf-twoType">
@@ -210,8 +212,14 @@
 													<em class="zf-important">*</em>
 												</label>
 											</span>
-											<span class="zf-flLeft zf-addtwo"> <input type="text" maxlength="255"
-													name="Address_Region" checktype="c1" placeholder="" />
+											<span class="zf-flLeft zf-addtwo">
+												<select class="Address_Region" name="Address_Region" checktype="c1"
+													placeholder="">
+													<option value="" selected="selected">Select State</option>
+												</select>
+
+												<!-- <input type="text" maxlength="255" name="Address_Region" checktype="c1"
+													placeholder="" /> -->
 												<label>State/Region/Province
 													<em class="zf-important">*</em>
 												</label>
@@ -224,10 +232,11 @@
 													<em class="zf-important">*</em>
 												</label>
 											</span>
-											<span class="zf-flLeft zf-addtwo"> <select class="zf-form-sBox"
-													name="Address_Country" checktype="c1">
-													<option value="-Select-">-Select-</option>
-													<option>&Aring;land Islands</option>
+											<span class="zf-flLeft zf-addtwo">
+												<select class="zf-form-sBox" name="Address_Country" checktype="c1">
+													<!-- <option value="-Select-" selected="selected">-Select-</option> -->
+													<option value="" selected="selected">Select Country</option>
+													<!-- <option>&Aring;land Islands</option>
 													<option>Afghanistan</option>
 													<option>Akrotiri</option>
 													<option>Albania</option>
@@ -494,7 +503,7 @@
 													<option>Western Sahara</option>
 													<option>Yemen</option>
 													<option>Zambia</option>
-													<option>Zimbabwe</option>
+													<option>Zimbabwe</option> -->
 												</select>
 												<label>Country
 													<em class="zf-important">*</em>
