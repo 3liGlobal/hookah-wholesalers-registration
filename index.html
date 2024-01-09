@@ -5,7 +5,6 @@
 	<title>Hookah&#x20;Wholesalers&#x20;Corporate&#x2f;Wholesale&#x20;Application</title>
 	<link href="css/form.css" rel="stylesheet" type="text/css">
 	<script src="js/validation.js"></script>
-	<script src="js/countries-states.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
@@ -596,6 +595,7 @@
 								value="Previous" />
 							<button class="zf-submitColor">Submit</button>
 						</fieldset>
+
 						<!---------File Upload Ends Here---------->
 					</ul>
 				</div><!---------template Container Starts Here---------->
@@ -611,34 +611,36 @@
 		var salesIQFieldsArray = [];
 		var arrayCode = ["PhoneNumber_countrycode"]
 	</script>
+	<script src="js/countries-states.js"></script>
+
 
 	<script>
 
-		var original_zf_MandArray = ["Name_Last", "Email", "SingleLine", "Address_AddressLine1", "Address_City", "Address_Region", "Address_ZipCode", "Address_Country"];
+		// var original_zf_MandArray = ["Name_Last", "Email", "SingleLine", "Address_AddressLine1", "Address_City", "Address_Region", "Address_ZipCode", "Address_Country"];
 
-		var zf_MandArray = original_zf_MandArray.slice();
+		// var zf_MandArray = original_zf_MandArray.slice();
 
-		function updateArray() {
-			var dropdown = $(".state-dropdown");
-			var isDropdownVisible = dropdown.is(":visible");
+		// function updateArray() {
+		// 	var dropdown = $(".state-dropdown");
+		// 	var isDropdownVisible = dropdown.is(":visible");
 
-			// Remove "Address_Region" if the dropdown is hidden
-			zf_MandArray = original_zf_MandArray.filter(function (element) {
-				return element !== "Address_Region" || isDropdownVisible;
-			});
+		// 	// Remove "Address_Region" if the dropdown is hidden
+		// 	zf_MandArray = original_zf_MandArray.filter(function (element) {
+		// 		return element !== "Address_Region" || isDropdownVisible;
+		// 	});
 
-			console.log(zf_MandArray);
-		}
+		// 	console.log(zf_MandArray);
+		// }
 
-		$(document).ready(function () {
-			// Trigger the function on page load
-			updateArray();
+		// $(document).ready(function () {
+		// 	// Trigger the function on page load
+		// 	updateArray();
 
-			// Trigger the function whenever the dropdown changes
-			$(".zf-form-sBox").change(function () {
-				updateArray();
-			});
-		});
+		// 	// Trigger the function whenever the dropdown changes
+		// 	$(".zf-form-sBox").change(function () {
+		// 		updateArray();
+		// 	});
+		// });
 
 	</script>
 </body>
