@@ -251,6 +251,16 @@ var countries = {
   Zimbabwe: "ZWE",
 };
 
+var countryArray = Object.entries(countries);
+
+countryArray.sort(function (a, b) {
+  return a[0].localeCompare(b[0]);
+});
+
+var sortedCountries = Object.fromEntries(countryArray);
+
+console.log(sortedCountries);
+
 var States = {
   ARE: {
     Dubai: "Dubai",
@@ -349,13 +359,14 @@ var zf_MandArray = original_zf_MandArray.slice();
 window.onload = function () {
   var countySel = document.querySelector(".zf-form-sBox"),
     stateDropdown = document.querySelector(".state-dropdown"),
-    stateText = document.querySelector(".state-text");
+    stateText = document.querySelector(".state-text"),
+    star = document.querySelector(".star");
 
   // Populate country dropdown on page load
-  for (var country in countries) {
+  for (var country in sortedCountries) {
     countySel.options[countySel.options.length] = new Option(
       country,
-      countries[country]
+      sortedCountries[country]
     );
   }
 
@@ -372,6 +383,7 @@ window.onload = function () {
     if (countySel.selectedIndex < 1) {
       // Hide both state dropdown and state text input if no country is selected
       stateDropdown.style.display = "none";
+      star.style.display = "none";
       stateText.style.display = "block";
       return;
     }
@@ -379,6 +391,7 @@ window.onload = function () {
     // Show either state dropdown or state text input based on the selected country
     if (countriesWithState.includes(countySel.value)) {
       stateDropdown.style.display = "block";
+      star.style.display = "inline-block";
       stateText.style.display = "none";
       for (var state in States[countySel.value]) {
         stateDropdown.options[stateDropdown.options.length] = new Option(
@@ -388,6 +401,7 @@ window.onload = function () {
       }
     } else {
       stateDropdown.style.display = "none";
+      star.style.display = "none";
       stateText.style.display = "block";
     }
   }
