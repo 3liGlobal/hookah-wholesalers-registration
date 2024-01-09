@@ -2210,7 +2210,7 @@ form input[type="tel"],
 form input[type="text"],
 form select,
 form textarea {
-  display: inline-block !important;
+  display: inline-block;
   width: 100% !important;
 }
 
@@ -2597,7 +2597,7 @@ form input[type="tel"],
 form input[type="text"],
 form select,
 form textarea {
-  display: inline-block !important;
+  display: inline-block;
   width: 100% !important;
 }
 
