@@ -433,7 +433,7 @@ const dropdownList = $('.dropdown-list');
 
 		// Function to handle the search input
 		function searchDropdown() {
-			const query = `http://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=USA&Limit=10&Text=${$('#searchInput').val()}`;
+			const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=USA&Limit=10&Text=${$('#searchInput').val()}`;
 
 			// Call the API to get data based on the search query
 			fetchData(query, data => {
@@ -451,7 +451,7 @@ const dropdownList = $('.dropdown-list');
 		}
 		function callback(e, thisObj) {
 			let id = thisObj.id;
-			const query = `http://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=USA&Limit=10&Container=${id}`;
+			const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=USA&Limit=10&Container=${id}`;
 			fetchData(query, data => {
 				const filteredOptions = data.Items;
 				dropdownList.empty();
