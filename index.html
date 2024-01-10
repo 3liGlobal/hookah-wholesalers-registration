@@ -352,63 +352,7 @@
 	<script src="js/countries-states.js"></script>
 
 
-	<script>
-		const dropdownList = $('.dropdown-list');
-		const addressInfo = $('.addressInfo');
-
-		function fetchData(query, callback) {
-			$.get(query, callback);
-		}
-
-		// Function to handle the search input
-		function searchDropdown() {
-			const query = `http://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=USA&Limit=10&Text=${$('#searchInput').val()}`;
-
-			// Call the API to get data based on the search query
-			fetchData(query, data => {
-				const filteredOptions = data.Items;
-				dropdownList.empty();
-				filteredOptions.forEach(option => {
-					if (option.Type === "Container") {
-						dropdownList.append(`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`);
-					} else {
-						dropdownList.append('<div class="dropdown-item">No matching results</div>');
-					}
-
-				});
-			});
-		}
-		function callback(e, thisObj) {
-			let id = thisObj.id;
-			const query = `http://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=USA&Limit=10&Container=${id}`;
-			fetchData(query, data => {
-				const filteredOptions = data.Items;
-				dropdownList.empty();
-				dropdownList.css({ 'max-height': '300px', 'overflow-y': 'auto' });
-
-				filteredOptions.forEach(option => {
-					if (option.Type === "Container") {
-						dropdownList.append(`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`);
-					} else {
-						dropdownList.append(`<div class="dropdown-item" id="${option.Id}" onclick="getAddressDetail(event, this);"> ${option.Text}</div>`);
-					}
-				});
-			});
-		}
-		function getAddressDetail(e, thisObj) {
-			let id = thisObj.id;
-			const query = `https://api.addressy.com/Capture/Interactive/Retrieve/v1.2/json3.ws?Key=TT94-AT81-MN48-CE66&Id=${id}`;
-			fetchData(query, data => {
-				const filteredOptions = data.Items;
-				filteredOptions.forEach(option => {
-					$("#city").val(option.City);
-					$(".street").val(option.Line1);
-					$("#country").val(option.CountryName);
-					dropdownList.empty();
-				});
-			});
-		}
-	</script>
+	
 </body>
 
 </html>
