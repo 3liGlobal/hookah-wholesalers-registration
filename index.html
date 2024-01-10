@@ -196,8 +196,11 @@
 								<div class="zf-tempContDiv zf-address">
 									<div class="zf-addrCont">
 										<div class="name-item-2">
-											<span class="zf-addOne"> <input type="text" maxlength="255"
-													name="Address_AddressLine1" checktype="c1" placeholder="" />
+											<span class="zf-addOne">
+												<input type="text" maxlength="255" name="Address_AddressLine1"
+													checktype="c1" placeholder="" class="street" id="searchInput"
+													oninput="searchDropdown()" />
+												<div class="dropdown-list"></div>
 												<label>Street Address
 													<em class="zf-important">*</em>
 												</label>
@@ -210,8 +213,9 @@
 											</span>
 										</div>
 										<div class="name-item-2">
-											<span class="zf-flLeft zf-addtwo"> <input type="text" maxlength="255"
-													name="Address_City" checktype="c1" placeholder="" />
+											<span class="zf-flLeft zf-addtwo">
+												<input type="text" maxlength="255" id="city" name="Address_City"
+													checktype="c1" placeholder="" />
 												<label>City
 													<em class="zf-important">*</em>
 												</label>
@@ -241,275 +245,9 @@
 											<span class="zf-flLeft zf-addtwo">
 												<select class="zf-form-sBox" name="Address_Country" checktype="c1">
 													<!-- <option value="-Select-" selected="selected">-Select-</option> -->
-													<option value="" selected="selected">Select Country</option>
-													<!-- <option>&Aring;land Islands</option>
-													<option>Afghanistan</option>
-													<option>Akrotiri</option>
-													<option>Albania</option>
-													<option>Algeria</option>
-													<option>American Samoa</option>
-													<option>Andorra</option>
-													<option>Angola</option>
-													<option>Anguilla</option>
-													<option>Antarctica</option>
-													<option>Antigua and Barbuda</option>
-													<option>Argentina</option>
-													<option>Armenia</option>
-													<option>Aruba</option>
-													<option>Ashmore and Cartier Islands</option>
-													<option>Australia</option>
-													<option>Austria</option>
-													<option>Azerbaijan</option>
-													<option>Bahrain</option>
-													<option>Bangladesh</option>
-													<option>Barbados</option>
-													<option>Bassas Da India</option>
-													<option>Belarus</option>
-													<option>Belgium</option>
-													<option>Belize</option>
-													<option>Benin</option>
-													<option>Bermuda</option>
-													<option>Bhutan</option>
-													<option>Bolivia</option>
-													<option>Bosnia and Herzegovina</option>
-													<option>Botswana</option>
-													<option>Bouvet Island</option>
-													<option>Brazil</option>
-													<option>British Indian Ocean Territory</option>
-													<option>British Virgin Islands</option>
-													<option>Brunei</option>
-													<option>Bulgaria</option>
-													<option>Burkina Faso</option>
-													<option>Burma</option>
-													<option>Burundi</option>
-													<option>Cambodia</option>
-													<option>Cameroon</option>
-													<option>Canada</option>
-													<option>Cape Verde</option>
-													<option>Caribbean Netherlands</option>
-													<option>Cayman Islands</option>
-													<option>Central African Republic</option>
-													<option>Chad</option>
-													<option>Chile</option>
-													<option>China</option>
-													<option>Christmas Island</option>
-													<option>Clipperton Island</option>
-													<option>Cocos &#x28;Keeling&#x29; Islands</option>
-													<option>Colombia</option>
-													<option>Comoros</option>
-													<option>Cook Islands</option>
-													<option>Coral Sea Islands</option>
-													<option>Costa Rica</option>
-													<option>Cote D&#x27;Ivoire</option>
-													<option>Croatia</option>
-													<option>Cuba</option>
-													<option>Cura&ccedil;ao</option>
-													<option>Cyprus</option>
-													<option>Czech Republic</option>
-													<option>Democratic Republic of the Congo</option>
-													<option>Denmark</option>
-													<option>Dhekelia</option>
-													<option>Djibouti</option>
-													<option>Dominica</option>
-													<option>Dominican Republic</option>
-													<option>Ecuador</option>
-													<option>Egypt</option>
-													<option>El Salvador</option>
-													<option>Equatorial Guinea</option>
-													<option>Eritrea</option>
-													<option>Estonia</option>
-													<option>Ethiopia</option>
-													<option>Europa Island</option>
-													<option>Falkland Islands &#x28;Islas Malvinas&#x29;</option>
-													<option>Faroe Islands</option>
-													<option>Federated States of Micronesia</option>
-													<option>Fiji</option>
-													<option>Finland</option>
-													<option>France</option>
-													<option>French Guiana</option>
-													<option>French Polynesia</option>
-													<option>French Southern and Antarctic Lands</option>
-													<option>Gabon</option>
-													<option>Gaza Strip</option>
-													<option>Georgia</option>
-													<option>Germany</option>
-													<option>Ghana</option>
-													<option>Gibraltar</option>
-													<option>Glorioso Islands</option>
-													<option>Greece</option>
-													<option>Greenland</option>
-													<option>Grenada</option>
-													<option>Guadeloupe</option>
-													<option>Guam</option>
-													<option>Guatemala</option>
-													<option>Guernsey</option>
-													<option>Guinea</option>
-													<option>Guinea-bissau</option>
-													<option>Guyana</option>
-													<option>Haiti</option>
-													<option>Heard Island and Mcdonald Islands</option>
-													<option>Holy See &#x28;Vatican City&#x29;</option>
-													<option>Honduras</option>
-													<option>Hong Kong</option>
-													<option>Hungary</option>
-													<option>Iceland</option>
-													<option>India</option>
-													<option>Indonesia</option>
-													<option>Iran</option>
-													<option>Iraq</option>
-													<option>Ireland</option>
-													<option>Isle of Man</option>
-													<option>Israel</option>
-													<option>Italy</option>
-													<option>Jamaica</option>
-													<option>Jan Mayen</option>
-													<option>Japan</option>
-													<option>Jersey</option>
-													<option>Jordan</option>
-													<option>Juan De Nova Island</option>
-													<option>Kazakhstan</option>
-													<option>Kenya</option>
-													<option>Kiribati</option>
-													<option>Kosovo</option>
-													<option>Kuwait</option>
-													<option>Kyrgyzstan</option>
-													<option>Laos</option>
-													<option>Latvia</option>
-													<option>Lebanon</option>
-													<option>Lesotho</option>
-													<option>Liberia</option>
-													<option>Libya</option>
-													<option>Liechtenstein</option>
-													<option>Lithuania</option>
-													<option>Luxembourg</option>
-													<option>Macau</option>
-													<option>Macedonia</option>
-													<option>Madagascar</option>
-													<option>Malawi</option>
-													<option>Malaysia</option>
-													<option>Maldives</option>
-													<option>Mali</option>
-													<option>Malta</option>
-													<option>Marshall Islands</option>
-													<option>Martinique</option>
-													<option>Mauritania</option>
-													<option>Mauritius</option>
-													<option>Mayotte</option>
-													<option>Mexico</option>
-													<option>Moldova</option>
-													<option>Monaco</option>
-													<option>Mongolia</option>
-													<option>Montenegro</option>
-													<option>Montserrat</option>
-													<option>Morocco</option>
-													<option>Mozambique</option>
-													<option>Myanmar</option>
-													<option>Namibia</option>
-													<option>Nauru</option>
-													<option>Navassa Island</option>
-													<option>Nepal</option>
-													<option>Netherlands</option>
-													<option>Netherlands Antilles</option>
-													<option>New Caledonia</option>
-													<option>New Zealand</option>
-													<option>Nicaragua</option>
-													<option>Niger</option>
-													<option>Nigeria</option>
-													<option>Niue</option>
-													<option>Norfolk Island</option>
-													<option>North Korea</option>
-													<option>Northern Mariana Islands</option>
-													<option>Norway</option>
-													<option>Oman</option>
-													<option>Pakistan</option>
-													<option>Palau</option>
-													<option>Palestine</option>
-													<option>Panama</option>
-													<option>Papua New Guinea</option>
-													<option>Paracel Islands</option>
-													<option>Paraguay</option>
-													<option>Peru</option>
-													<option>Philippines</option>
-													<option>Pitcairn Islands</option>
-													<option>Poland</option>
-													<option>Portugal</option>
-													<option>Puerto Rico</option>
-													<option>Qatar</option>
-													<option>Republic of the Congo</option>
-													<option>Reunion</option>
-													<option>Romania</option>
-													<option>Russia</option>
-													<option>Rwanda</option>
-													<option>Saint Barth&Atilde;&copy;lemy</option>
-													<option>Saint Helena</option>
-													<option>Saint Kitts and Nevis</option>
-													<option>Saint Lucia</option>
-													<option>Saint Martin</option>
-													<option>Saint Pierre and Miquelon</option>
-													<option>Saint Vincent and the Grenadines</option>
-													<option>Samoa</option>
-													<option>San Marino</option>
-													<option>Sao Tome and Principe</option>
-													<option>Saudi Arabia</option>
-													<option>Senegal</option>
-													<option>Serbia</option>
-													<option>Seychelles</option>
-													<option>Sierra Leone</option>
-													<option>Singapore</option>
-													<option>Sint Maarten</option>
-													<option>Slovakia</option>
-													<option>Slovenia</option>
-													<option>Solomon Islands</option>
-													<option>Somalia</option>
-													<option>South Africa</option>
-													<option>South Georgia and the South Sandwich Islands</option>
-													<option>South Korea</option>
-													<option>South Sudan</option>
-													<option>Spain</option>
-													<option>Spratly Islands</option>
-													<option>Sri Lanka</option>
-													<option>Sudan</option>
-													<option>Suriname</option>
-													<option>Svalbard</option>
-													<option>Swaziland</option>
-													<option>Sweden</option>
-													<option>Switzerland</option>
-													<option>Syria</option>
-													<option>Taiwan</option>
-													<option>Tajikistan</option>
-													<option>Tanzania</option>
-													<option>Thailand</option>
-													<option>The Bahamas</option>
-													<option>The Gambia</option>
-													<option>Timor-leste</option>
-													<option>Togo</option>
-													<option>Tokelau</option>
-													<option>Tonga</option>
-													<option>Trinidad and Tobago</option>
-													<option>Tromelin Island</option>
-													<option>Tunisia</option>
-													<option>Turkey</option>
-													<option>Turkmenistan</option>
-													<option>Turks and Caicos Islands</option>
-													<option>Tuvalu</option>
-													<option>Uganda</option>
-													<option>Ukraine</option>
-													<option>United Arab Emirates</option>
-													<option>United Kingdom</option>
-													<option>United States</option>
-													<option>Uruguay</option>
-													<option>Uzbekistan</option>
-													<option>Vanuatu</option>
-													<option>Venezuela</option>
-													<option>Vietnam</option>
-													<option>Virgin Islands</option>
-													<option>Wake Island</option>
-													<option>Wallis and Futuna</option>
-													<option>West Bank</option>
-													<option>Western Sahara</option>
-													<option>Yemen</option>
-													<option>Zambia</option>
-													<option>Zimbabwe</option> -->
+													<option value="" id="country" selected="selected">Select Country
+													</option>
+
 												</select>
 												<label>Country
 													<em class="zf-important">*</em>
@@ -611,37 +349,65 @@
 		var salesIQFieldsArray = [];
 		var arrayCode = ["PhoneNumber_countrycode"]
 	</script>
-	<script src="js/countries-states.js"></script>
+	<script src="js/state.js"></script>
 
 
 	<script>
+		const dropdownList = $('.dropdown-list');
+		const addressInfo = $('.addressInfo');
 
-		// var original_zf_MandArray = ["Name_Last", "Email", "SingleLine", "Address_AddressLine1", "Address_City", "Address_Region", "Address_ZipCode", "Address_Country"];
+		function fetchData(query, callback) {
+			$.get(query, callback);
+		}
 
-		// var zf_MandArray = original_zf_MandArray.slice();
+		// Function to handle the search input
+		function searchDropdown() {
+			const query = `http://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=USA&Limit=10&Text=${$('#searchInput').val()}`;
 
-		// function updateArray() {
-		// 	var dropdown = $(".state-dropdown");
-		// 	var isDropdownVisible = dropdown.is(":visible");
+			// Call the API to get data based on the search query
+			fetchData(query, data => {
+				const filteredOptions = data.Items;
+				dropdownList.empty();
+				filteredOptions.forEach(option => {
+					if (option.Type === "Container") {
+						dropdownList.append(`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`);
+					} else {
+						dropdownList.append('<div class="dropdown-item">No matching results</div>');
+					}
 
-		// 	// Remove "Address_Region" if the dropdown is hidden
-		// 	zf_MandArray = original_zf_MandArray.filter(function (element) {
-		// 		return element !== "Address_Region" || isDropdownVisible;
-		// 	});
+				});
+			});
+		}
+		function callback(e, thisObj) {
+			let id = thisObj.id;
+			const query = `http://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=USA&Limit=10&Container=${id}`;
+			fetchData(query, data => {
+				const filteredOptions = data.Items;
+				dropdownList.empty();
+				dropdownList.css({ 'max-height': '300px', 'overflow-y': 'auto' });
 
-		// 	console.log(zf_MandArray);
-		// }
-
-		// $(document).ready(function () {
-		// 	// Trigger the function on page load
-		// 	updateArray();
-
-		// 	// Trigger the function whenever the dropdown changes
-		// 	$(".zf-form-sBox").change(function () {
-		// 		updateArray();
-		// 	});
-		// });
-
+				filteredOptions.forEach(option => {
+					if (option.Type === "Container") {
+						dropdownList.append(`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`);
+					} else {
+						dropdownList.append(`<div class="dropdown-item" id="${option.Id}" onclick="getAddressDetail(event, this);"> ${option.Text}</div>`);
+					}
+				});
+			});
+		}
+		function getAddressDetail(e, thisObj) {
+			let id = thisObj.id;
+			const query = `https://api.addressy.com/Capture/Interactive/Retrieve/v1.2/json3.ws?Key=TT94-AT81-MN48-CE66&Id=${id}`;
+			fetchData(query, data => {
+				const filteredOptions = data.Items;
+				filteredOptions.forEach(option => {
+					$("#city").val(option.City);
+					$(".street").val(option.Line1);
+					$("#country").val(option.CountryName);
+					dropdownList.empty();
+				});
+			});
+		}
 	</script>
 </body>
 
