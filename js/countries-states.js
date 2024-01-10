@@ -424,8 +424,8 @@ window.onload = function () {
   updateArray();
 };
 
-const dropdownList = $('.dropdown-list');
-		const addressInfo = $('.addressInfo');
+const dropdownList = $(".dropdown-list");
+		const addressInfo = $(".addressInfo");
 
 		function fetchData(query, callback) {
 			$.get(query, callback);
@@ -433,35 +433,50 @@ const dropdownList = $('.dropdown-list');
 
 		// Function to handle the search input
 		function searchDropdown() {
-			const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=USA&Limit=10&Text=${$('#searchInput').val()}`;
+			var inputLength = $("#searchInput").val().length;
+			if (inputLength > 0) {
+				const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Limit=10&Text=${$(
+					"#searchInput"
+				).val()}`;
 
-			// Call the API to get data based on the search query
-			fetchData(query, data => {
-				const filteredOptions = data.Items;
-				dropdownList.empty();
-				filteredOptions.forEach(option => {
-					if (option.Type === "Container") {
-						dropdownList.append(`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`);
-					} else {
-						dropdownList.append('<div class="dropdown-item">No matching results</div>');
-					}
-
+				// Call the API to get data based on the search query
+				fetchData(query, (data) => {
+					const filteredOptions = data.Items;
+					dropdownList.empty();
+					filteredOptions.forEach((option) => {
+						if (option.Type === "Container") {
+							dropdownList.append(
+								`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`
+							);
+						} else {
+							dropdownList.append(
+								`<div class="dropdown-item" id="${option.Id}" onclick="getAddressDetail(event, this);"> ${option.Text}</div>`
+							);
+						}
+					});
 				});
-			});
+			} else {
+				dropdownList.empty();
+			}
+
 		}
 		function callback(e, thisObj) {
 			let id = thisObj.id;
-			const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=USA&Limit=10&Container=${id}`;
-			fetchData(query, data => {
+			const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Limit=10&Container=${id}`;
+			fetchData(query, (data) => {
 				const filteredOptions = data.Items;
 				dropdownList.empty();
-				dropdownList.css({ 'max-height': '300px', 'overflow-y': 'auto' });
+				dropdownList.css({ "max-height": "300px", "overflow-y": "auto" });
 
-				filteredOptions.forEach(option => {
+				filteredOptions.forEach((option) => {
 					if (option.Type === "Container") {
-						dropdownList.append(`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`);
+						dropdownList.append(
+							`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`
+						);
 					} else {
-						dropdownList.append(`<div class="dropdown-item" id="${option.Id}" onclick="getAddressDetail(event, this);"> ${option.Text}</div>`);
+						dropdownList.append(
+							`<div class="dropdown-item" id="${option.Id}" onclick="getAddressDetail(event, this);"> ${option.Text}</div>`
+						);
 					}
 				});
 			});
@@ -469,12 +484,14 @@ const dropdownList = $('.dropdown-list');
 		function getAddressDetail(e, thisObj) {
 			let id = thisObj.id;
 			const query = `https://api.addressy.com/Capture/Interactive/Retrieve/v1.2/json3.ws?Key=TT94-AT81-MN48-CE66&Id=${id}`;
-			fetchData(query, data => {
+			fetchData(query, (data) => {
 				const filteredOptions = data.Items;
-				filteredOptions.forEach(option => {
+				filteredOptions.forEach((option) => {
 					$("#city").val(option.City);
-					$(".street").val(option.Line1);
-					$("#country").val(option.CountryName);
+					option.Line1 ? $(".street").val(option.Line1) : $(".street").val(option.City);
+					//$("#country").val(option.CountryName);
+					$(".state-text").val(option.Province);
+					$("#postalCode").val(option.PostalCode);
 					dropdownList.empty();
 				});
 			});
