@@ -165842,6 +165842,8 @@ window.onload = function () {
       stateDropdown.style.display = "block";
       star.style.display = "inline-block";
       stateText.style.display = "none";
+      cityDropdown.style.display = "block";
+      cityText.style.display = "none";
       for (var state in States[selectedCountryCode]) {
         stateDropdown.options[stateDropdown.options.length] = new Option(
           state,
@@ -165850,6 +165852,8 @@ window.onload = function () {
       }
     } else {
       stateDropdown.style.display = "none";
+      cityDropdown.style.display = "none";
+      cityText.style.display = "block";
       star.style.display = "none";
       stateText.style.display = "block";
 
@@ -165935,10 +165939,14 @@ window.onload = function () {
   function updateArray() {
     // setTimeout(function () {
     var isDropdownVisible = stateDropdown.style.display === "block";
+    var isDropdownCityVisible = cityDropdown.style.display === "block";
 
     // Remove "Address_Region" if the dropdown is hidden
     zf_MandArray = original_zf_MandArray.filter(function (element) {
-      return element !== "Address_Region" || isDropdownVisible;
+      return (
+        (element !== "Address_Region" || isDropdownVisible) &&
+        (element !== "Address_City" || isDropdownCityVisible)
+      );
     });
 
     // console.log(zf_MandArray);
