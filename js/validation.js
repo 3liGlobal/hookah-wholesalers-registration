@@ -2,7 +2,7 @@
 function zf_ValidateAndSubmit() {
   if (zf_CheckMandatory() && zf_ValidCheck() && doubleCheck()) {
     $(document).ready(function () {
-      console.log("docum");
+      //console.log("docum");
       var current_fs, next_fs, previous_fs; //fieldsets
       var opacity;
       var current = 1;
@@ -192,7 +192,7 @@ function zf_ShowErrorMsg1(uniqName) {
     document.getElementById(fldLinkName + "_error").style.display = "none";
   }
   var linkName = uniqName.split("_")[0];
-  console.log(linkName);
+  //console.log(linkName);
   document.getElementById(linkName + "_error").style.display = "block";
 }
 
@@ -280,7 +280,7 @@ function zf_ShowErrorMsg(uniqName) {
     document.getElementById(fldLinkName + "_error").style.display = "none";
   }
   var linkName = uniqName.split("_")[0];
-  console.log(linkName);
+  //console.log(linkName);
   document.getElementById(linkName + "_error").style.display = "block";
 }
 function zf_ValidateNumber(elem) {

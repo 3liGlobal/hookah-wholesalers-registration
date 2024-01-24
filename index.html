@@ -198,36 +198,19 @@
 								<div class="zf-tempContDiv zf-address">
 									<div class="zf-addrCont">
 										<div class="name-item-2">
-											<span class="zf-addOne">
-												<label>Street Address
-													<em class="zf-important">*</em>
-												</label>
-												<input type="text" maxlength="255" name="Address_AddressLine1"
-													checktype="c1" placeholder="" class="street" id="searchInput"
-													oninput="searchDropdown()" />
-												<div class="dropdown-list"></div>
 
-											</span>
-											<span class="zf-addOne">
-												<label>Suite/Unit/Apt. Number
-													<em class="zf-important">*</em>
-												</label>
-												<input type="text" maxlength="255" name="Address_AddressLine2"
-													checktype="c1" placeholder="" />
-
-											</span>
-										</div>
-										<div class="name-item-2">
 											<span class="zf-flLeft zf-addtwo">
-												<label>City
+												<label>Country
 													<em class="zf-important">*</em>
 												</label>
-												<select class="city-dropdown" id="city" name="Address_City"
-													checktype="c1" placeholder="" disabled>
-													<option value="" selected="selected">Select City</option>
+												<select class="zf-form-sBox" name="Address_Country" checktype="c1">
+													<!-- <option value="-Select-" selected="selected">-Select-</option> -->
+													<option value="" id="country" selected="selected">Select Country
+													</option>
+													<!-- <option value="" id="country" selected="selected">Select Country
+													</option> -->
+
 												</select>
-												<input type="text" class="city-text" maxlength="255" id="city"
-													placeholder="" />
 
 											</span>
 											<span class="zf-flLeft zf-addtwo">
@@ -245,29 +228,46 @@
 													placeholder="" /> -->
 
 											</span>
+
 										</div>
 										<div class="name-item-2">
+											<span class="zf-flLeft zf-addtwo">
+												<label>City
+													<em class="zf-important">*</em>
+												</label>
+												<select class="city-dropdown" id="city" name="Address_City"
+													checktype="c1" placeholder="" disabled>
+													<option value="" selected="selected">Select City</option>
+												</select>
+												<input type="text" class="city-text" maxlength="255" id="city"
+													placeholder="" />
+
+											</span>
 											<span class="zf-flLeft zf-addtwo disabled">
 												<label>Postal / Zip Code
 													<em class="zf-important">*</em>
 												</label>
 												<input type="text" maxlength="255" name="Address_ZipCode" checktype="c1"
-													placeholder="" id="postalCode" />
+													placeholder="" id="postalCode" disabled />
 
 											</span>
-											<span class="zf-flLeft zf-addtwo">
-												<label>Country
+										</div>
+										<div class="name-item-2">
+											<span class="zf-addOne">
+												<label>Street Address
 													<em class="zf-important">*</em>
 												</label>
-												<select class="zf-form-sBox" name="Address_Country" checktype="c1">
-													<!-- <option value="-Select-" selected="selected">-Select-</option> -->
-													<option value="USA" id="country" selected="selected">United States
-														of America
-													</option>
-													<!-- <option value="" id="country" selected="selected">Select Country
-													</option> -->
-
-												</select>
+												<input type="text" maxlength="255" name="Address_AddressLine1"
+													checktype="c1" placeholder="" class="street" id="searchInput"
+													oninput="searchDropdown()" />
+												<div class="dropdown-list"></div>
+											</span>
+											<span class="zf-addOne">
+												<label>Suite/Unit/Apt. Number
+													<em class="zf-important">*</em>
+												</label>
+												<input type="text" maxlength="255" name="Address_AddressLine2"
+													checktype="c1" placeholder="" />
 
 											</span>
 										</div>
@@ -378,9 +378,10 @@
 
 		// Function to handle the search input
 		function searchDropdown() {
+			debugger
 			var inputLength = $("#searchInput").val().length;
 			if (inputLength > 0) {
-				const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Limit=10&Text=${$(
+				const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=US&Limit=10&Text=${$(
 					"#searchInput"
 				).val()}`;
 
@@ -389,6 +390,7 @@
 					const filteredOptions = data.Items;
 					dropdownList.empty();
 					filteredOptions.forEach((option) => {
+						debugger
 						if (option.Type === "Container") {
 							dropdownList.append(
 								`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`
@@ -407,7 +409,7 @@
 		}
 		function callback(e, thisObj) {
 			let id = thisObj.id;
-			const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Limit=10&Container=${id}`;
+			const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=US&Limit=10&Container=${id}`;
 			fetchData(query, (data) => {
 				const filteredOptions = data.Items;
 				dropdownList.empty();
