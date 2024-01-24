@@ -378,10 +378,10 @@
 
 		// Function to handle the search input
 		function searchDropdown() {
-			debugger
+			
 			var inputLength = $("#searchInput").val().length;
 			if (inputLength > 0) {
-				const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=US&Limit=10&Text=${$(
+				const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=10&Text=${$(
 					"#searchInput"
 				).val()}`;
 
@@ -390,7 +390,6 @@
 					const filteredOptions = data.Items;
 					dropdownList.empty();
 					filteredOptions.forEach((option) => {
-						debugger
 						if (option.Type === "Container") {
 							dropdownList.append(
 								`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`
@@ -409,7 +408,7 @@
 		}
 		function callback(e, thisObj) {
 			let id = thisObj.id;
-			const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TT94-AT81-MN48-CE66&Countries=US&Limit=10&Container=${id}`;
+			const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=10&Container=${id}`;
 			fetchData(query, (data) => {
 				const filteredOptions = data.Items;
 				dropdownList.empty();
@@ -430,7 +429,7 @@
 		}
 		function getAddressDetail(e, thisObj) {
 			let id = thisObj.id;
-			const query = `https://api.addressy.com/Capture/Interactive/Retrieve/v1.2/json3.ws?Key=TT94-AT81-MN48-CE66&Id=${id}`;
+			const query = `https://api.addressy.com/Capture/Interactive/Retrieve/v1.2/json3.ws?Key=TY78-BD75-NW81-XE97&Id=${id}`;
 			fetchData(query, (data) => {
 				const filteredOptions = data.Items;
 				filteredOptions.forEach((option) => {
