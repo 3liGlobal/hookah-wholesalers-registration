@@ -186,6 +186,7 @@ function doubleCheck() {
 }
 
 function zf_ShowErrorMsg1(uniqName) {
+  debugger
   var fldLinkName;
   for (errInd = 0; errInd < zf_FieldArray.length; errInd++) {
     fldLinkName = zf_FieldArray[errInd].split("_")[0];
@@ -274,6 +275,7 @@ function zf_ValidCheck() {
   return isValid;
 }
 function zf_ShowErrorMsg(uniqName) {
+  debugger
   var fldLinkName;
   for (errInd = 0; errInd < zf_FieldArray.length; errInd++) {
     fldLinkName = zf_FieldArray[errInd].split("_")[0];
