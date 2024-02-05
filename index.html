@@ -390,7 +390,6 @@
 			var country = $(".dropdown-countries").find(":selected").text();
 			var city = $(".Address_City").val();
 			var zipCode = $(".Address_ZipCode").val();
-			alert(country + city + zipCode)
 			var inputLength = $("#searchInput").val().length;
 			if (inputLength > 0) {
 				const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=5&Text=${$(
