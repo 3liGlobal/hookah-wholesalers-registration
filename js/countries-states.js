@@ -152493,6 +152493,7 @@ window.onload = function () {
   // Handle change event on country dropdown
   countySel.onchange = function () {
     cityDropdown.length = 1;
+    zipDropdown.length = 1;
     zipDropdown.disabled = true;
     cityDropdown.disabled = true;
     updateStateDropdown();
