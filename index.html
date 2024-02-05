@@ -390,7 +390,7 @@
 
 			var inputLength = $("#searchInput").val().length;
 			if (inputLength > 0) {
-				const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=10&Text=${$(
+				const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=5&Text=${$(
 					"#searchInput"
 				).val()}`;
 
@@ -402,6 +402,10 @@
 						if (option.Type === "Container") {
 							dropdownList.append(
 								`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`
+							);
+						} else if (option.Type === "Street") {
+							dropdownList.append(
+								`<div class="dropdown-item" id="Street, ${option.Text}" onclick="getAddressDetail(event, this);"> ${option.Text}</div>`
 							);
 						} else {
 							dropdownList.append(
@@ -428,6 +432,10 @@
 						dropdownList.append(
 							`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`
 						);
+					} else if (option.Type === "Street") {
+						dropdownList.append(
+							`<div class="dropdown-item" id="Street, ${option.Text}" onclick="getAddressDetail(event, this);"> ${option.Text}</div>`
+						);
 					} else {
 						dropdownList.append(
 							`<div class="dropdown-item" id="${option.Id}" onclick="getAddressDetail(event, this);"> ${option.Text}</div>`
@@ -438,18 +446,19 @@
 		}
 		function getAddressDetail(e, thisObj) {
 			let id = thisObj.id;
-			const query = `https://api.addressy.com/Capture/Interactive/Retrieve/v1.2/json3.ws?Key=TY78-BD75-NW81-XE97&Id=${id}`;
-			fetchData(query, (data) => {
-				const filteredOptions = data.Items;
-				filteredOptions.forEach((option) => {
-					// $("#city").val(option.City);
-					option.Line1 ? $(".street").val(option.Line1) : $(".street").val(option.City);
-					//$("#country").val(option.CountryName);
-					// $(".state-text").val(option.Province);
-					// $("#postalCode").val(option.PostalCode);
-					dropdownList.empty();
+			if (id.includes("Street")) {
+				$(".street").val(id.split(",")[1]);
+				dropdownList.empty();
+			} else {
+				const query = `https://api.addressy.com/Capture/Interactive/Retrieve/v1.2/json3.ws?Key=TY78-BD75-NW81-XE97&Id=${id}`;
+				fetchData(query, (data) => {
+					const filteredOptions = data.Items;
+					filteredOptions.forEach((option) => {
+						option.Line1 ? $(".street").val(option.Line1) : $(".street").val(option.City);
+						dropdownList.empty();
+					});
 				});
-			});
+			}
 		}
 
 	</script>
