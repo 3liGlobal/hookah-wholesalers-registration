@@ -1,6 +1,6 @@
 // $Id: $
-function zf_ValidateAndSubmit() {
-  if (zf_CheckMandatory() && zf_ValidCheck() && doubleCheck()) {
+async function zf_ValidateAndSubmit() {
+  if (zf_CheckMandatory() && zf_ValidCheck() && doubleCheck() && await validate_Email()) {
     $(document).ready(function () {
       //console.log("docum");
       var current_fs, next_fs, previous_fs; //fieldsets
@@ -186,7 +186,6 @@ function doubleCheck() {
 }
 
 function zf_ShowErrorMsg1(uniqName) {
-  debugger
   var fldLinkName;
   for (errInd = 0; errInd < zf_FieldArray.length; errInd++) {
     fldLinkName = zf_FieldArray[errInd].split("_")[0];
@@ -275,7 +274,6 @@ function zf_ValidCheck() {
   return isValid;
 }
 function zf_ShowErrorMsg(uniqName) {
-  debugger
   var fldLinkName;
   for (errInd = 0; errInd < zf_FieldArray.length; errInd++) {
     fldLinkName = zf_FieldArray[errInd].split("_")[0];
@@ -487,4 +485,40 @@ function zf_FocusNext(elem, event) {
       document.getElementsByName(compname + "_second")[0].focus();
     }
   }
+}
+
+function validate_Email() {
+  return new Promise(async function (myResolve, myReject) {
+    let email = $("#Email").val();
+    if (email) {
+      const apiUrl =
+        "https://middlewares.azurewebsites.net/api/EmailCheckerZoho?email=" +
+        email;
+
+      // Make the API call using fetch
+      await fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.flag) {
+            document.getElementById("Email_error").innerText =
+              "Duplicate Email";
+            document.getElementById("Email_error").style.display = "block";
+            myResolve(false);
+          } else {
+            myResolve(true);
+          }
+        })
+        .catch((error) => {
+          // Handle any errors that occur during the fetch
+          console.error("There was a problem with the fetch operation:", error);
+        });
+    } else {
+		myResolve(false);
+    }
+  });
 }
