@@ -115,14 +115,14 @@ var countries = {
   // Jamaica: "JAM",
   // Jersey: "JEY",
   // Jordan: "JOR",
-  // Japan: "JPN",
+  Japan: "JPN",
   // Kazakhstan: "KAZ",
   // Kenya: "KEN",
   // Kyrgyzstan: "KGZ",
   // Cambodia: "KHM",
   // Kiribati: "KIR",
   // "Saint Kitts and Nevis": "KNA",
-  // "Korea (Republic of)": "KOR",
+  "Korea (Republic of)": "KOR",
   // Kuwait: "KWT",
   // "Lao People's Democratic Republic": "LAO",
   // Lebanon: "LBN",
@@ -152534,6 +152534,7 @@ window.onload = function () {
         );
       }
     } else {
+      $(".dropdown-list").empty();
       stateDropdown.style.display = "none";
       cityDropdown.style.display = "none";
       zipDropdown.style.display = "none";

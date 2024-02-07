@@ -71,7 +71,7 @@
 									<div class="zf-nameWrapper">
 										<span><label>First Name</label>
 											<input type="text" maxlength="255" name="Name_First" fieldType=7
-												placeholder="" autocomplete="off"/>
+												placeholder="" autocomplete="off" />
 										</span>
 										</span> </span>
 										<span> <label>Last Name
@@ -79,7 +79,7 @@
 
 											</label>
 											<input type="text" maxlength="255" name="Name_Last" fieldType=7
-												placeholder="" autocomplete="off"/>
+												placeholder="" autocomplete="off" />
 											<p id="Name_error" class="zf-errorMessage" style="display:none;">Invalid
 												value</p>
 
@@ -140,7 +140,7 @@
 													name="PhoneNumber_countrycode" maxlength="20" checktype="c7"
 													value="" phoneFormat="1" isCountryCodeEnabled=false fieldType="11"
 													id="international_PhoneNumber_countrycode" valType="number"
-													phoneFormatType="1" placeholder="" autocomplete="off"/>
+													phoneFormatType="1" placeholder="" autocomplete="off" />
 											</span>
 											<div class="zf-clearBoth"></div>
 										</div>
@@ -160,7 +160,7 @@
 													name="PhoneNumber1_countrycode" maxlength="20" checktype="c7"
 													value="" phoneFormat="1" isCountryCodeEnabled=false fieldType="11"
 													id="international_PhoneNumber1_countrycode" valType="number"
-													phoneFormatType="1" placeholder="" autocomplete="off"/>
+													phoneFormatType="1" placeholder="" autocomplete="off" />
 											</span>
 											<div class="zf-clearBoth"></div>
 										</div>
@@ -218,10 +218,12 @@
 												<label>State/Region/Province
 													<em class="zf-important star">*</em>
 												</label>
-												<select class="Address_Region state-dropdown" checktype="c1" placeholder="">
+												<select class="Address_Region state-dropdown" checktype="c1"
+													placeholder="">
 													<option value="" selected="selected">Select State</option>
 												</select>
-												<input type="text" class="Address_Region state-text" name="Address_Region" placeholder="" autocomplete="off">
+												<input type="text" class="Address_Region state-text"
+													name="Address_Region" placeholder="" autocomplete="off">
 
 											</span>
 
@@ -231,21 +233,25 @@
 												<label>City
 													<em class="zf-important">*</em>
 												</label>
-												<select class="Address_City city-dropdown" id="city" checktype="c1" placeholder="" disabled>
+												<select class="Address_City city-dropdown" id="city" checktype="c1"
+													placeholder="" disabled>
 													<option value="" selected="selected">Select City</option>
 												</select>
-												<input type="text" class="Address_City city-text" name="Address_City" maxlength="255" placeholder="" autocomplete="off" />
+												<input type="text" class="Address_City city-text" name="Address_City"
+													maxlength="255" placeholder="" autocomplete="off" />
 
 											</span>
 											<span class="zf-flLeft zf-addtwo disabled">
 												<label>Postal / Zip Code
 													<em class="zf-important">*</em>
 												</label>
-												<select class="Address_ZipCode zip-dropdown" id="postalCode" checktype="c1" placeholder="" disabled>
+												<select class="Address_ZipCode zip-dropdown" id="postalCode"
+													checktype="c1" placeholder="" disabled>
 													<option value="" selected="selected">Select Zip</option>
 												</select>
 												<input type="text" maxlength="255" placeholder="" name="Address_ZipCode"
-													id="postalCode" class="Address_ZipCode zip-text" autocomplete="off" />
+													id="postalCode" class="Address_ZipCode zip-text"
+													autocomplete="off" />
 
 											</span>
 										</div>
@@ -256,7 +262,7 @@
 													<em class="zf-important">*</em>
 												</label>
 												<input type="text" maxlength="255" name="SingleLine1" checktype="c1"
-													placeholder="" class="county" id="county" autocomplete="off"/>
+													placeholder="" class="county" id="county" autocomplete="off" />
 												<p id="SingleLine1_error" class="zf-errorMessage" style="display:none;">
 													Invalid value</p>
 											</span>
@@ -265,7 +271,7 @@
 													<em class="zf-important">*</em>
 												</label>
 												<input type="text" maxlength="255" name="Address_AddressLine2"
-													checktype="c1" placeholder="" autocomplete="off"/>
+													checktype="c1" placeholder="" autocomplete="off" />
 											</span>
 										</div>
 
@@ -282,7 +288,8 @@
 								</label>
 								<div class="zf-tempContDiv">
 									<span> <input type="text" maxlength="255" name="Address_AddressLine1" checktype="c1"
-											placeholder="" class="street" id="searchInput" oninput="searchDropdown()" />
+											placeholder="" class="street" id="searchInput"
+											oninput="searchDropdown()" />
 										<div class="dropdown-list"></div>
 									</span>
 								</div>
@@ -388,33 +395,39 @@
 		function searchDropdown() {
 
 			var country = $(".dropdown-countries").find(":selected").text();
-			var city = $(".Address_City").val();
-			var zipCode = $(".Address_ZipCode").val();
-			var inputLength = $("#searchInput").val().length;
-			if (inputLength > 0) {
-				const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=5&Text=${$(
-					"#searchInput"
-				).val()}`;
+			var country_val = $(".zf-form-sBox").find(":selected").val();
+			if (country_val == "USA") {
+				var city = $(".Address_City").val();
+				var zipCode = $(".Address_ZipCode").val();
+				var inputLength = $("#searchInput").val().length;
+				if (inputLength > 0) {
+					const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=5&Text=${$(
+						"#searchInput"
+					).val()}`;
 
-				// Call the API to get data based on the search query
-				fetchData(query, (data) => {
-					const filteredOptions = data.Items;
-					dropdownList.empty();
-					filteredOptions.forEach((option) => {
-						if (option.Type === "Container" || option.Type === "Street") {
-							dropdownList.append(
-								`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`
-							);
-						} else {
-							dropdownList.append(
-								`<div class="dropdown-item" id="${option.Id}" onclick="getAddressDetail(event, this);"> ${option.Text}</div>`
-							);
-						}
+					// Call the API to get data based on the search query
+					fetchData(query, (data) => {
+						const filteredOptions = data.Items;
+						dropdownList.empty();
+						filteredOptions.forEach((option) => {
+							if (option.Type === "Container" || option.Type === "Street") {
+								dropdownList.append(
+									`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`
+								);
+							} else {
+								dropdownList.append(
+									`<div class="dropdown-item" id="${option.Id}" onclick="getAddressDetail(event, this);"> ${option.Text}</div>`
+								);
+							}
+						});
 					});
-				});
+				} else {
+					dropdownList.empty();
+				}
 			} else {
 				dropdownList.empty();
 			}
+
 
 		}
 		function callback(e, thisObj) {
