@@ -152490,7 +152490,7 @@ window.onload = function () {
       sortedCountries[country]
     );
   }
-
+  countySel.value = "USA";
   // Handle change event on country dropdown
   countySel.onchange = function () {
     cityDropdown.length = 1;
