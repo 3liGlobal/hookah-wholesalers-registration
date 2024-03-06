@@ -152493,10 +152493,10 @@ window.onload = function () {
   countySel.value = "USA";
   // Handle change event on country dropdown
   countySel.onchange = function () {
-    cityDropdown.length = 1;
-    zipDropdown.length = 1;
-    zipDropdown.disabled = true;
-    cityDropdown.disabled = true;
+    //cityDropdown.length = 1;
+    //zipDropdown.length = 1;
+    //zipDropdown.disabled = true;
+    //cityDropdown.disabled = true;
     updateStateDropdown();
     // updateStateDropdown1();
     updateArray();
@@ -152516,12 +152516,12 @@ window.onload = function () {
       stateDropdown.style.display = "block";
       star.style.display = "inline-block";
       stateText.style.display = "none";
-      cityDropdown.style.display = "block";
-      cityText.style.display = "none";
-      zipDropdown.style.display = "block";
-      zipText.style.display = "none";
-      countyInput.readOnly = true;
-      zipText.readOnly = true;
+      // cityDropdown.style.display = "block";
+      // cityText.style.display = "none";
+      // zipDropdown.style.display = "block";
+      // zipText.style.display = "none";
+      // countyInput.readOnly = true;
+      // zipText.readOnly = true;
       stateLabel.value = "";
 
       stateText.value = "";
@@ -152538,186 +152538,189 @@ window.onload = function () {
     } else {
       $(".dropdown-list").empty();
       stateDropdown.style.display = "none";
-      cityDropdown.style.display = "none";
-      zipDropdown.style.display = "none";
-      star.style.display = "none";
+      //cityDropdown.style.display = "none";
+      //zipDropdown.style.display = "none";
+      //star.style.display = "none";
       stateText.style.display = "block";
-      cityText.style.display = "block";
-      zipText.style.display = "block";
+      //cityText.style.display = "block";
+      //zipText.style.display = "block";
 
       stateText.value = "";
-      cityText.value = "";
-      zipText.value = "";
-      countyInput.value = "";
+      stateText.placeholder = "State/Region/Province";
+      //cityText.value = "";
+      //zipText.value = "";
+      //countyInput.value = "";
       stateLabel.value = "";
 
-      zipText.readOnly = false;
-      zipDropdown.disabled = false;
-      countyInput.readOnly = false;
+      //zipText.readOnly = false;
+      //zipDropdown.disabled = false;
+      //countyInput.readOnly = false;
 
-      cityDropdown.length = 1;
-      cityDropdown.disabled = true;
+      //cityDropdown.length = 1;
+      //cityDropdown.disabled = true;
     }
   }
 
   stateDropdown.onchange = function () {
-    updateCityDropdown();
-  };
-
-  function updateCityDropdown() {
-    const selectedCountry = countySel.value; // Replace with the actual reference to the country dropdown
+    //updateCityDropdown();
     const selectedState = document.querySelector(".state-dropdown").value;
     stateText.value = selectedState;
-    const cityDropdown = document.querySelector(".city-dropdown");
-    const zipDropdown = document.querySelector(".zip-dropdown");
-    const countyInput = document.getElementById("county");
-
-    // Disable the city dropdown and zipcode input
-    cityDropdown.disabled = true;
-    zipDropdown.disabled = true;
-    countyInput.readOnly = true;
-
-    // Clear existing options
-    cityDropdown.innerHTML = '<option value="">Select City</option>'; // Reset to default option
-    zipDropdown.innerHTML = '<option value="">Select Zip code</option>'; // Reset to default option
-
-    stateLabel.value = "";
-    cityText.value = "";
-    zipText.value = "";
-    countyInput.value = "";
-
-    if (countySel.value == "USA") {
-      stateLabel.value = stateDropdown.selectedOptions[0].innerHTML;
-    }
-    // If a country is selected, proceed to update the city dropdown
-    if (selectedCountry) {
-      // Enable the city dropdown
-      cityDropdown.disabled = false;
-
-      // If a state is selected, proceed to update the city dropdown
-      if (selectedState) {
-        //console.log(selectedState);
-        // Use a Set to keep track of unique cities
-        const uniqueCities = new Set();
-
-        // Filter cities based on the selected state and add to the Set
-        zip_city_state
-          .filter((entry) => entry.STATE === selectedState)
-          .forEach((entry) => uniqueCities.add(entry.CITY));
-
-        // Convert the Set to an array, sort alphabetically, and add new options to the city dropdown
-        const sortedCities = Array.from(uniqueCities).sort();
-        sortedCities.forEach((city) => {
-          const option = document.createElement("option");
-          option.value = city;
-          option.text = city;
-          cityDropdown.add(option);
-        });
-      }
-    }
-  }
-
-  cityDropdown.onchange = function () {
-    updateZipCodeDropdown();
   };
 
-  function updateZipCodeDropdown() {
-    const selectedCountry = countySel.value; // Replace with the actual reference to the country dropdown
-    const selectedState = stateDropdown.value;
-    const cityDropdown = document.querySelector(".city-dropdown").value;
-    cityText.value = cityDropdown;
-    const zipDropdown = document.querySelector(".zip-dropdown");
-    const countyInput = document.getElementById("county");
+  // function updateCityDropdown() {
+  //   const selectedCountry = countySel.value; // Replace with the actual reference to the country dropdown
+  //   const selectedState = document.querySelector(".state-dropdown").value;
+  //   stateText.value = selectedState;
+  //   const cityDropdown = document.querySelector(".city-dropdown");
+  //   const zipDropdown = document.querySelector(".zip-dropdown");
+  //   const countyInput = document.getElementById("county");
 
-    zipDropdown.disabled = true;
-    countyInput.readOnly = true;
+  //   // Disable the city dropdown and zipcode input
+  //   cityDropdown.disabled = true;
+  //   zipDropdown.disabled = true;
+  //   countyInput.readOnly = true;
 
-    zipText.value = "";
-    countyInput.value = "";
+  //   // Clear existing options
+  //   cityDropdown.innerHTML = '<option value="">Select City</option>'; // Reset to default option
+  //   zipDropdown.innerHTML = '<option value="">Select Zip code</option>'; // Reset to default option
 
-    if (selectedCountry && selectedState && cityDropdown) {
-      const uniqueZipCode = new Set();
+  //   stateLabel.value = "";
+  //   cityText.value = "";
+  //   zipText.value = "";
+  //   countyInput.value = "";
 
-      // Filter cities based on the selected state and add to the Set
-      zip_city_state
-        .filter(
-          (entry) =>
-            entry.STATE === selectedState && entry.CITY === cityDropdown
-        )
-        .forEach((entry) => uniqueZipCode.add(entry.ZIPCODE));
+  //   if (countySel.value == "USA") {
+  //     stateLabel.value = stateDropdown.selectedOptions[0].innerHTML;
+  //   }
+  //   // If a country is selected, proceed to update the city dropdown
+  //   if (selectedCountry) {
+  //     // Enable the city dropdown
+  //     cityDropdown.disabled = false;
 
-      zipDropdown.style.display = "block";
-      zipText.style.display = "none";
-      zipDropdown.innerHTML = '<option value="">Select Zip code</option>';
-      zipDropdown.disabled = false;
-      const sortedZipCode = Array.from(uniqueZipCode).sort();
-      sortedZipCode.forEach((zipcode) => {
-        const option = document.createElement("option");
-        option.value = zipcode;
-        option.text = zipcode;
-        zipDropdown.add(option);
-      });
-      if (uniqueZipCode.size === 1) {
-        zipDropdown.options[1].selected = true;
-        zipDropdown.disabled = true;
+  //     // If a state is selected, proceed to update the city dropdown
+  //     if (selectedState) {
+  //       //console.log(selectedState);
+  //       // Use a Set to keep track of unique cities
+  //       const uniqueCities = new Set();
 
-        let selectedCity = document.querySelector(".city-dropdown").value;
+  //       // Filter cities based on the selected state and add to the Set
+  //       zip_city_state
+  //         .filter((entry) => entry.STATE === selectedState)
+  //         .forEach((entry) => uniqueCities.add(entry.CITY));
 
-        const selectedEntry = zip_city_state.find(
-          (entry) =>
-            entry.STATE === document.querySelector(".state-dropdown").value &&
-            entry.CITY === selectedCity
-        );
+  //       // Convert the Set to an array, sort alphabetically, and add new options to the city dropdown
+  //       const sortedCities = Array.from(uniqueCities).sort();
+  //       sortedCities.forEach((city) => {
+  //         const option = document.createElement("option");
+  //         option.value = city;
+  //         option.text = city;
+  //         cityDropdown.add(option);
+  //       });
+  //     }
+  //   }
+  // }
 
-        if (selectedEntry && selectedEntry.ZIPCODE) {
-          zipText.value = selectedEntry.ZIPCODE;
-          countyInput.value = selectedEntry.COUNTY;
-        }
-      }
-    }
-  }
+  // cityDropdown.onchange = function () {
+  //   updateZipCodeDropdown();
+  // };
 
-  zipDropdown.onchange = function () {
-    zipCodeDropdownChangeHandler();
-  };
+  // function updateZipCodeDropdown() {
+  //   const selectedCountry = countySel.value; // Replace with the actual reference to the country dropdown
+  //   const selectedState = stateDropdown.value;
+  //   const cityDropdown = document.querySelector(".city-dropdown").value;
+  //   cityText.value = cityDropdown;
+  //   const zipDropdown = document.querySelector(".zip-dropdown");
+  //   const countyInput = document.getElementById("county");
 
-  function zipCodeDropdownChangeHandler() {
-    const selectedZipCode = document.querySelector(".zip-dropdown").value;
+  //   zipDropdown.disabled = true;
+  //   countyInput.readOnly = true;
 
-    const uniqueZipCode = new Set();
-    const sortedZipCode = Array.from(uniqueZipCode).sort();
-    sortedZipCode.forEach((zipcode) => {
-      const option = document.createElement("option");
-      option.value = zipcode;
-      option.text = zipcode;
-      zipDropdown.add(option);
-    });
+  //   zipText.value = "";
+  //   countyInput.value = "";
 
-    const selectedEntry = zip_city_state.find(
-      (entry) =>
-        entry.STATE === document.querySelector(".state-dropdown").value &&
-        entry.CITY === document.querySelector(".city-dropdown").value &&
-        entry.ZIPCODE === selectedZipCode
-    );
+  //   if (selectedCountry && selectedState && cityDropdown) {
+  //     const uniqueZipCode = new Set();
 
-    if (selectedEntry && selectedEntry.ZIPCODE) {
-      zipText.value = selectedZipCode;
-      countyInput.value = selectedEntry.COUNTY;
-    }
-  }
+  //     // Filter cities based on the selected state and add to the Set
+  //     zip_city_state
+  //       .filter(
+  //         (entry) =>
+  //           entry.STATE === selectedState && entry.CITY === cityDropdown
+  //       )
+  //       .forEach((entry) => uniqueZipCode.add(entry.ZIPCODE));
+
+  //     zipDropdown.style.display = "block";
+  //     zipText.style.display = "none";
+  //     zipDropdown.innerHTML = '<option value="">Select Zip code</option>';
+  //     zipDropdown.disabled = false;
+  //     const sortedZipCode = Array.from(uniqueZipCode).sort();
+  //     sortedZipCode.forEach((zipcode) => {
+  //       const option = document.createElement("option");
+  //       option.value = zipcode;
+  //       option.text = zipcode;
+  //       zipDropdown.add(option);
+  //     });
+  //     if (uniqueZipCode.size === 1) {
+  //       zipDropdown.options[1].selected = true;
+  //       zipDropdown.disabled = true;
+
+  //       let selectedCity = document.querySelector(".city-dropdown").value;
+
+  //       const selectedEntry = zip_city_state.find(
+  //         (entry) =>
+  //           entry.STATE === document.querySelector(".state-dropdown").value &&
+  //           entry.CITY === selectedCity
+  //       );
+
+  //       if (selectedEntry && selectedEntry.ZIPCODE) {
+  //         zipText.value = selectedEntry.ZIPCODE;
+  //         countyInput.value = selectedEntry.COUNTY;
+  //       }
+  //     }
+  //   }
+  // }
+
+  // zipDropdown.onchange = function () {
+  //   zipCodeDropdownChangeHandler();
+  // };
+
+  // function zipCodeDropdownChangeHandler() {
+  //   const selectedZipCode = document.querySelector(".zip-dropdown").value;
+
+  //   const uniqueZipCode = new Set();
+  //   const sortedZipCode = Array.from(uniqueZipCode).sort();
+  //   sortedZipCode.forEach((zipcode) => {
+  //     const option = document.createElement("option");
+  //     option.value = zipcode;
+  //     option.text = zipcode;
+  //     zipDropdown.add(option);
+  //   });
+
+  //   const selectedEntry = zip_city_state.find(
+  //     (entry) =>
+  //       entry.STATE === document.querySelector(".state-dropdown").value &&
+  //       entry.CITY === document.querySelector(".city-dropdown").value &&
+  //       entry.ZIPCODE === selectedZipCode
+  //   );
+
+  //   if (selectedEntry && selectedEntry.ZIPCODE) {
+  //     zipText.value = selectedZipCode;
+  //     countyInput.value = selectedEntry.COUNTY;
+  //   }
+  // }
 
   function updateArray() {
     // setTimeout(function () {
     var isDropdownVisible = stateDropdown.style.display === "block";
-    var isDropdownCityVisible = cityDropdown.style.display === "block";
-    var isDropdownZCVisible = zipDropdown.style.display === "block";
+    //var isDropdownCityVisible = cityDropdown.style.display === "block";
+    //var isDropdownZCVisible = zipDropdown.style.display === "block";
 
     // Remove "Address_Region" if the dropdown is hidden
     zf_MandArray = original_zf_MandArray.filter(function (element) {
       return (
-        (element !== "Address_Region" || isDropdownVisible) &&
-        (element !== "Address_City" || isDropdownCityVisible) &&
-        (element !== "Address_ZipCode" || isDropdownZCVisible)
+        (element !== "Address_Region" || isDropdownVisible) 
+        // &&(element !== "Address_City" || isDropdownCityVisible) 
+        // &&(element !== "Address_ZipCode" || isDropdownZCVisible)
       );
     });
 

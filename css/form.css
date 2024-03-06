@@ -1147,8 +1147,9 @@ ul {
   .name-item,
   .city-item {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
+
   .name-item-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1563,9 +1564,9 @@ label {
 .dropdown-list {
   position: absolute;
   background: #f5f5f5;
-  width: 50%;
+  width: 98%;
   z-index: 10;
-  border-radius: 15px;
+  border-radius: 5px;
   max-height: 300px;
   overflow-y: auto;
 }
