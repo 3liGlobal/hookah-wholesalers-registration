@@ -152499,7 +152499,7 @@ window.onload = function () {
     //cityDropdown.disabled = true;
     updateStateDropdown();
     // updateStateDropdown1();
-    updateArray();
+    //updateArray();
   };
 
   function updateStateDropdown() {
@@ -152562,12 +152562,12 @@ window.onload = function () {
   }
 
   stateDropdown.onchange = function () {
-    //updateCityDropdown();
+    updateCityDropdown();
     const selectedState = document.querySelector(".state-dropdown").value;
     stateText.value = selectedState;
   };
 
-  // function updateCityDropdown() {
+  function updateCityDropdown() {
   //   const selectedCountry = countySel.value; // Replace with the actual reference to the country dropdown
   //   const selectedState = document.querySelector(".state-dropdown").value;
   //   stateText.value = selectedState;
@@ -152584,14 +152584,14 @@ window.onload = function () {
   //   cityDropdown.innerHTML = '<option value="">Select City</option>'; // Reset to default option
   //   zipDropdown.innerHTML = '<option value="">Select Zip code</option>'; // Reset to default option
 
-  //   stateLabel.value = "";
+   stateLabel.value = "";
   //   cityText.value = "";
   //   zipText.value = "";
   //   countyInput.value = "";
 
-  //   if (countySel.value == "USA") {
-  //     stateLabel.value = stateDropdown.selectedOptions[0].innerHTML;
-  //   }
+if (countySel.value == "USA") {
+    stateLabel.value = stateDropdown.selectedOptions[0].innerHTML;
+  }
   //   // If a country is selected, proceed to update the city dropdown
   //   if (selectedCountry) {
   //     // Enable the city dropdown
@@ -152678,7 +152678,7 @@ window.onload = function () {
   //       }
   //     }
   //   }
-  // }
+  }
 
   // zipDropdown.onchange = function () {
   //   zipCodeDropdownChangeHandler();
@@ -152709,28 +152709,28 @@ window.onload = function () {
   //   }
   // }
 
-  function updateArray() {
-    // setTimeout(function () {
-    var isDropdownVisible = stateDropdown.style.display === "block";
-    //var isDropdownCityVisible = cityDropdown.style.display === "block";
-    //var isDropdownZCVisible = zipDropdown.style.display === "block";
+  // function updateArray() {
+  //   // setTimeout(function () {
+  //   var isDropdownVisible = stateDropdown.style.display === "block";
+  //   //var isDropdownCityVisible = cityDropdown.style.display === "block";
+  //   //var isDropdownZCVisible = zipDropdown.style.display === "block";
 
-    // Remove "Address_Region" if the dropdown is hidden
-    zf_MandArray = original_zf_MandArray.filter(function (element) {
-      return (
-        (element !== "Address_Region" || isDropdownVisible) 
-        // &&(element !== "Address_City" || isDropdownCityVisible) 
-        // &&(element !== "Address_ZipCode" || isDropdownZCVisible)
-      );
-    });
+  //   // Remove "Address_Region" if the dropdown is hidden
+  //   zf_MandArray = original_zf_MandArray.filter(function (element) {
+  //     return (
+  //       (element !== "Address_Region" || isDropdownVisible) 
+  //       // &&(element !== "Address_City" || isDropdownCityVisible) 
+  //       // &&(element !== "Address_ZipCode" || isDropdownZCVisible)
+  //     );
+  //   });
 
-    // console.log(zf_MandArray);
-    // }, 100); // Adjust the delay as needed
-  }
+  //   // console.log(zf_MandArray);
+  //   // }, 100); // Adjust the delay as needed
+  // }
 
   // Initial setup
   updateStateDropdown();
-  updateArray();
+  //updateArray();
 
   stateText.addEventListener("input", myFunction);
   function myFunction() {
