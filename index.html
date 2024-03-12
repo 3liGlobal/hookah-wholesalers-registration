@@ -12,12 +12,14 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/google-libphonenumber/3.2.13/libphonenumber.min.js"></script>
 	<style>
 		.state-dropdown,
 		.state-text
+
 		/* .city-text, */
 		/* .zip-text */
-		 {
+			{
 			display: none;
 		}
 	</style>
@@ -145,7 +147,8 @@
 													name="PhoneNumber_countrycode" maxlength="20" checktype="c7"
 													value="" phoneFormat="1" isCountryCodeEnabled=false fieldType="11"
 													id="international_PhoneNumber_countrycode" valType="number"
-													phoneFormatType="1" placeholder="" autocomplete="off" />
+													phoneFormatType="1" placeholder="" autocomplete="off"
+													oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 											</span>
 											<div class="zf-clearBoth"></div>
 										</div>
@@ -165,7 +168,8 @@
 													name="PhoneNumber1_countrycode" maxlength="20" checktype="c7"
 													value="" phoneFormat="1" isCountryCodeEnabled=false fieldType="11"
 													id="international_PhoneNumber1_countrycode" valType="number"
-													phoneFormatType="1" placeholder="" autocomplete="off" />
+													phoneFormatType="1" placeholder="" autocomplete="off"
+													oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 											</span>
 											<div class="zf-clearBoth"></div>
 										</div>
@@ -218,7 +222,7 @@
 												</select>
 
 											</span>
-											
+
 										</div>
 
 										<div class="name-item">
@@ -228,9 +232,9 @@
 													<em class="zf-important">*</em>
 												</label>
 												<input type="text" maxlength="255" name="Address_AddressLine1"
-													checktype="c1" placeholder="Street Address" class="street" id="searchInput"
-													oninput="searchDropdown()" />
-													<div class="dropdown-list"></div>
+													checktype="c1" placeholder="Street Address" class="street"
+													id="searchInput" oninput="searchDropdown()" />
+												<div class="dropdown-list"></div>
 											</span>
 										</div>
 
@@ -265,7 +269,7 @@
 													value="" maxlength="255" fieldType=1 placeholder="" />
 											</span>
 
-											
+
 										</div>
 
 										<div class="name-item-2">
@@ -277,9 +281,9 @@
 													checktype="c1" placeholder="" disabled>
 													<option value="" selected="selected">Select Zip</option>
 												</select> -->
-												<input type="text" maxlength="255" placeholder="Postal / Zip Code" name="Address_ZipCode"
-													id="postalCode" class="Address_ZipCode zip-text"
-													autocomplete="off" />
+												<input type="text" maxlength="255" placeholder="Postal / Zip Code"
+													name="Address_ZipCode" id="postalCode"
+													class="Address_ZipCode zip-text" autocomplete="off" />
 
 											</span>
 
@@ -288,7 +292,8 @@
 													<em class="zf-important">*</em>
 												</label>
 												<input type="text" maxlength="255" name="SingleLine1" checktype="c1"
-													placeholder="County" class="county" id="county" autocomplete="off" />
+													placeholder="County" class="county" id="county"
+													autocomplete="off" />
 												<p id="SingleLine1_error" class="zf-errorMessage" style="display:none;">
 													Invalid value</p>
 											</span>
@@ -299,7 +304,8 @@
 											<label>Suite/Unit/Apt. Number <em class="zf-important">*</em>
 											</label>
 											<input type="text" maxlength="255" name="Address_AddressLine2"
-												checktype="c1" placeholder="Suite/Unit/Apt. Number" autocomplete="off" />
+												checktype="c1" placeholder="Suite/Unit/Apt. Number"
+												autocomplete="off" />
 										</div>
 
 										<div class="zf-clearBoth"></div>
@@ -515,6 +521,13 @@
 			allowDropdown: true,
 			hiddenInput: "full",
 			utilsScript: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.js"
+		});
+
+		document.addEventListener("keydown", function (event) {
+			if (event.key === "Enter") {
+				event.preventDefault(); // Prevent form from being submitted through enter key
+				zf_ValidateAndSubmit();
+			}
 		});
 
 		// $("form").submit(function () {

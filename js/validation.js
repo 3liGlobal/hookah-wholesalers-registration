@@ -1,6 +1,13 @@
 // $Id: $
 async function zf_ValidateAndSubmit() {
-  if (zf_CheckMandatory() && zf_ValidCheck() && doubleCheck() && await validate_Email()) {
+  if (
+    zf_CheckMandatory() &&
+    zf_ValidCheck() &&
+    doubleCheck() &&
+    (await validate_Email()) &&
+    (await phoneNumberValidation()) &&
+    phoneFormat()
+  ) {
     $(document).ready(function () {
       //console.log("docum");
       var current_fs, next_fs, previous_fs; //fieldsets
@@ -518,7 +525,99 @@ function validate_Email() {
           console.error("There was a problem with the fetch operation:", error);
         });
     } else {
-		myResolve(false);
+      myResolve(false);
     }
   });
+}
+
+function phoneNumberValidation() {
+  const phoneNumber = parseInt(
+    document
+      .getElementById("international_PhoneNumber_countrycode")
+      .value.trim()
+  );
+  const mobileNumber = parseInt(
+    document
+      .getElementById("international_PhoneNumber1_countrycode")
+      .value.trim()
+  );
+
+  return new Promise(function (resolve) {
+    const isValidPhoneNumber = validatePhoneNumber(
+      phoneNumber,
+      "PhoneNumber_error",
+      "Business Phone Should be more than 5"
+    );
+    const isValidMobileNumber = validatePhoneNumber(
+      mobileNumber,
+      "PhoneNumber1_error",
+      "Mobile Phone Should be more than 5"
+    );
+
+    resolve(isValidPhoneNumber && isValidMobileNumber);
+  });
+}
+
+function validatePhoneNumber(number, errorId, errorMessage) {
+  const isValid = !isNaN(number) && number > 5;
+  const errorElement = document.getElementById(errorId);
+
+  if (isValid) {
+    errorElement.style.display = "none";
+  } else {
+    errorElement.textContent = errorMessage;
+    errorElement.style.display = "block";
+  }
+
+  return isValid;
+}
+
+function phoneFormat() {
+  let valid = false;
+  // Get the intlTelInput instances for phone number fields
+  var iti = window.intlTelInputGlobals.getInstance(
+    document.getElementById("international_PhoneNumber_countrycode")
+  );
+  var iti1 = window.intlTelInputGlobals.getInstance(
+    document.getElementById("international_PhoneNumber1_countrycode")
+  );
+
+  // Get the values of phone numbers
+  const phoneNumber = document
+    .getElementById("international_PhoneNumber_countrycode")
+    .value.trim();
+  const mobileNumber = document
+    .getElementById("international_PhoneNumber1_countrycode")
+    .value.trim();
+
+  // Get the selected country codes
+  var countryCode = iti.getSelectedCountryData().iso2;
+  var countryCode1 = iti1.getSelectedCountryData().iso2;
+
+  // Parse the phone numbers
+  const PhoneNumber = window.libphonenumber.PhoneNumberUtil.getInstance();
+  const number = PhoneNumber.parse(phoneNumber, countryCode);
+  const number1 = PhoneNumber.parse(mobileNumber, countryCode1);
+
+  // Validate the parsed phone numbers
+  if (!PhoneNumber.isValidNumber(number)) {
+    document.getElementById("PhoneNumber_error").textContent =
+      "Please insert the correct phone number";
+    document.getElementById("PhoneNumber_error").style.display = "block";
+    valid = false;
+  } else {
+    document.getElementById("PhoneNumber_error").style.display = "none";
+    valid = true;
+  }
+
+  if (!PhoneNumber.isValidNumber(number1)) {
+    document.getElementById("PhoneNumber1_error").textContent =
+      "Please insert the correct phone number";
+    document.getElementById("PhoneNumber1_error").style.display = "block";
+    valid = false;
+  } else {
+    document.getElementById("PhoneNumber1_error").style.display = "none";
+    valid = true;
+  }
+  return valid;
 }
