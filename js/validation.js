@@ -499,7 +499,7 @@ function validate_Email() {
     let email = $("#Email").val();
     if (email) {
       const apiUrl =
-        "https://middlewares.azurewebsites.net/api/EmailCheckerZoho?email=" +
+        "https://middlewares.azurewebsites.net/api/EmailCheckerZoho?environment=Production&email=" +
         email;
 
       // Make the API call using fetch
