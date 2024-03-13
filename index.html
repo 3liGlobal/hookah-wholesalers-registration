@@ -436,7 +436,7 @@
 				var zipCode = $(".Address_ZipCode").val();
 				var inputLength = $("#searchInput").val().length;
 				if (inputLength > 0) {
-					const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=5&Text=${$(
+					const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=20&Text=${$(
 						"#searchInput"
 					).val()}`;
 
@@ -445,7 +445,7 @@
 						const filteredOptions = data.Items;
 						dropdownList.empty();
 						filteredOptions.forEach((option) => {
-							if (option.Type === "Container" || option.Type === "Street") {
+							if (option.Type === "Container" || option.Type === "Street" || option.Type === "Locality" || option.Type === "BuildingNumber") {
 								dropdownList.append(
 									`<div class="dropdown-item"> ${option.Text} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`
 								);
@@ -463,9 +463,10 @@
 				dropdownList.empty();
 			}
 		}
+
 		function callback(e, thisObj) {
 			let id = thisObj.id;
-			const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=10&Container=${id}`;
+			const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=20&Container=${id}`;
 			fetchData(query, (data) => {
 				const filteredOptions = data.Items;
 				dropdownList.empty();
@@ -478,16 +479,25 @@
 						);
 					} else if (option.Type === "Street") {
 						dropdownList.append(
-							`<div class="dropdown-item" id="Street, ${option.Text}" onclick="getAddressDetail(event, this);"> ${option.Text}</div>`
+							`<div class="dropdown-item" id="Street, ${option.Text}" onclick="getAddressDetail(event, this);"> ${option.Text}  <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div></div>`
+						);
+					} else if (option.Type === "Locality") {
+						dropdownList.append(
+							`<div class="dropdown-item" id="Locality, ${option.Text}" onclick="getAddressDetail(event, this);"> ${option.Text}  <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div></div>`
+						);
+					} else if (option.Type === "BuildingNumber") {
+						dropdownList.append(
+							`<div class="dropdown-item" id="BuildingNumber, ${option.Text}" onclick="getAddressDetail(event, this);"> ${option.Text}  <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div></div>`
 						);
 					} else {
 						dropdownList.append(
-							`<div class="dropdown-item" id="${option.Id}" onclick="getAddressDetail(event, this);"> ${option.Text}</div>`
+							`<div class="dropdown-item" id="${option.Id}" onclick="getAddressDetail(event, this);"> ${option.Text} </div>`
 						);
 					}
 				});
 			});
 		}
+
 		function getAddressDetail(e, thisObj) {
 			let id = thisObj.id;
 			const query = `https://api.addressy.com/Capture/Interactive/Retrieve/v1.2/json3.ws?Key=TY78-BD75-NW81-XE97&Id=${id}`;
