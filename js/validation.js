@@ -513,7 +513,7 @@ function validate_Email() {
         .then((data) => {
           if (data.flag) {
             document.getElementById("Email_error").innerText =
-              "Duplicate Email";
+              "Email Already Exist";
             document.getElementById("Email_error").style.display = "block";
             myResolve(false);
           } else {
