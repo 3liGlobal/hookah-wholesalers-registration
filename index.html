@@ -232,6 +232,9 @@
 													checktype="c1" placeholder="Street Address" class="street"
 													id="searchInput" oninput="searchDropdown()" />
 												<div class="dropdown-list"></div>
+												<p id="Address_AddressLine1_error" class="zf-errorMessage"
+													style="display:none;">
+													Please complete this required field.</p>
 											</span>
 										</div>
 
@@ -439,6 +442,7 @@
 					fetchData(query, (data) => {
 						const filteredOptions = data.Items;
 						dropdownList.empty();
+						appendCloseButton();
 						filteredOptions.forEach((option) => {
 							if (option.Type === "Container" || option.Type === "Street" || option.Type === "Locality" || option.Type === "BuildingNumber") {
 								dropdownList.append(
@@ -465,6 +469,7 @@
 			fetchData(query, (data) => {
 				const filteredOptions = data.Items;
 				dropdownList.empty();
+				appendCloseButton();
 				dropdownList.css({ "max-height": "300px", "overflow-y": "auto" });
 
 				filteredOptions.forEach((option) => {
@@ -550,6 +555,18 @@
 				}, 5000);
 			});
 		</script>
+			<script>
+				function appendCloseButton() {
+					const closeButton = document.createElement("button");
+					closeButton.classList.add("close-button");
+					closeButton.innerHTML = "&times;";
+		
+					closeButton.addEventListener("click", function () {
+						dropdownList.empty();
+					});
+					dropdownList.append(closeButton);
+				}
+			</script>
 </body>
 
 </html>
