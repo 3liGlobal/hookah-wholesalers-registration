@@ -89,7 +89,7 @@
 												<em class="zf-important">*</em>
 											</label>
 											<input type="text" maxlength="255" name="Name_First" fieldType=7
-												placeholder="First Name" autocomplete="off" />
+												placeholder="First Name" autocomplete="off" onkeypress="return blockSpecialChar(event)"/>
 											<p id="Name_error" class="zf-errorMessage" style="display:none;">Please
 												complete the required field.</p>
 										</span>
@@ -99,7 +99,7 @@
 
 											</label>
 											<input type="text" maxlength="255" name="Name_Last" fieldType=7
-												placeholder="Last Name" autocomplete="off" />
+												placeholder="Last Name" autocomplete="off" onkeypress="return blockSpecialChar(event)"/>
 											<p id="Name_error" class="zf-errorMessage" style="display:none;">Please
 												complete the required field.</p>
 
@@ -209,7 +209,8 @@
 								</label>
 								<div class="zf-tempContDiv">
 									<span> <input type="text" name="SingleLine" checktype="c1" value="" maxlength="255"
-											fieldType=1 placeholder="Company Name" autocomplete="off" /></span>
+											fieldType=1 placeholder="Company Name" autocomplete="off"
+											onkeypress="return blockSpecialChar(event)" /></span>
 									<p id="SingleLine_error" class="zf-errorMessage" style="display:none;">Please
 										complete this required field.
 									</p>
@@ -590,6 +591,13 @@
 				dropdownList.empty();
 			});
 			dropdownList.append(closeButton);
+		}
+	</script>
+	<script type="text/javascript">
+		function blockSpecialChar(e) {
+			var k;
+			document.all ? k = e.keyCode : k = e.which;
+			return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57));
 		}
 	</script>
 </body>
