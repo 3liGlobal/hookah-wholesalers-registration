@@ -551,7 +551,7 @@ function phoneNumberValidation() {
     const isValidMobileNumber = validatePhoneNumber(
       mobileNumber,
       "PhoneNumber1_error",
-      "Mobile Phone Should be more than 5"
+      "Please complete the required field."
     );
 
     resolve(isValidPhoneNumber && isValidMobileNumber);
