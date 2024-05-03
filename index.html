@@ -89,7 +89,8 @@
 												<em class="zf-important">*</em>
 											</label>
 											<input type="text" maxlength="255" name="Name_First" fieldType=7
-												placeholder="First Name" autocomplete="off" onkeypress="return blockSpecialChar(event)"/>
+												placeholder="First Name" autocomplete="off"
+												onkeypress="return blockSpecialChar(event)" />
 											<p id="Name_error" class="zf-errorMessage" style="display:none;">Please
 												complete the required field.</p>
 										</span>
@@ -99,7 +100,8 @@
 
 											</label>
 											<input type="text" maxlength="255" name="Name_Last" fieldType=7
-												placeholder="Last Name" autocomplete="off" onkeypress="return blockSpecialChar(event)"/>
+												placeholder="Last Name" autocomplete="off"
+												onkeypress="return blockSpecialChar(event)" />
 											<p id="Name_error" class="zf-errorMessage" style="display:none;">Please
 												complete the required field.</p>
 
@@ -442,7 +444,134 @@
 	</script>
 	<script src="js/countries-states.js"></script>
 
-	<script>
+<script>
+		const dropdownList = $(".dropdown-list");
+		const addressInfo = $(".addressInfo");
+
+		function fetchData(query, callback) {
+			$.get(query, callback);
+		}
+		// Function to handle the search input
+		function searchDropdown() {
+
+			var country = $(".dropdown-countries").find(":selected").text();
+			var country_val = $(".zf-form-sBox").find(":selected").val();
+			if (country_val == "USA") {
+				var city = $(".Address_City").val();
+				var zipCode = $(".Address_ZipCode").val();
+				var inputLength = $("#searchInput").val().length;
+				if (inputLength > 0) {
+					const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=20&Text=${$(
+						"#searchInput"
+					).val()}`;
+
+					// Call the API to get data based on the search query
+					fetchData(query, (data) => {
+						const filteredOptions = data.Items;
+						dropdownList.empty();
+						appendCloseButton();
+						filteredOptions.forEach((option) => {
+							if (option.Type === "Container" || option.Type === "Street" || option.Type === "Locality" || option.Type === "BuildingNumber" || option.Type === "BuildingNumberType") {
+								dropdownList.append(
+									`<div class="dropdown-item"> ${option.Text} ${option.Description.includes("-") ? option.Description.substring(0, option.Description.lastIndexOf(" - ")) : option.Description} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`
+								);
+							} else {
+								dropdownList.append(
+									`<div class="dropdown-item" id="${option.Id}" onclick="getAddressDetail(event, this);"> ${option.Text} ${option.Description.includes("-") ? option.Description.substring(0, option.Description.lastIndexOf(" - ")) : option.Description}</div>`
+								);
+							}
+						});
+					});
+				} else {
+					dropdownList.empty();
+				}
+			} else {
+				dropdownList.empty();
+			}
+		}
+
+		function callback(e, thisObj) {
+			let id = thisObj.id;
+			const query = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws?Key=TY78-BD75-NW81-XE97&Countries=US&Limit=20&Container=${id}`;
+			fetchData(query, (data) => {
+				const filteredOptions = data.Items;
+				dropdownList.empty();
+				appendCloseButton();
+				dropdownList.css({ "max-height": "300px", "overflow-y": "auto" });
+
+				filteredOptions.forEach((option) => {
+					if (option.Type === "Container") {
+						dropdownList.append(
+							`<div class="dropdown-item"> ${option.Text} ${option.Description.includes("-") ? option.Description.substring(0, option.Description.lastIndexOf(" - ")) : option.Description}<span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div>`
+						);
+					} else if (option.Type === "Street") {
+						dropdownList.append(
+							`<div class="dropdown-item" id="Street, ${option.Text}" onclick="getAddressDetail(event, this);"> ${option.Text} ${option.Description.includes("-") ? option.Description.substring(0, option.Description.lastIndexOf(" - ")) : option.Description}  <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div></div>`
+						);
+					} else if (option.Type === "Locality") {
+						dropdownList.append(
+							`<div class="dropdown-item" id="Locality, ${option.Text}" onclick="getAddressDetail(event, this);"> ${option.Text} ${option.Description.includes("-") ? option.Description.substring(0, option.Description.lastIndexOf(" - ")) : option.Description} <span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div></div>`
+						);
+					} else if (option.Type === "BuildingNumber") {
+						dropdownList.append(
+							`<div class="dropdown-item" id="BuildingNumber, ${option.Text}" onclick="getAddressDetail(event, this);"> ${option.Text}  ${option.Description.includes("-") ? option.Description.substring(0, option.Description.lastIndexOf(" - ")) : option.Description}<span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div></div>`
+						);
+					} else if (option.Type === "BuildingNumberType") {
+						dropdownList.append(
+							`<div class="dropdown-item" id="BuildingNumberType, ${option.Text}" onclick="getAddressDetail(event, this);"> ${option.Text}  ${option.Description.includes("-") ? option.Description.substring(0, option.Description.lastIndexOf(" - ")) : option.Description}<span id="${option.Id}" onclick="callback(event, this);">see all ${option.Description}</span></div></div>`
+						);
+					} else {
+						dropdownList.append(
+							`<div class="dropdown-item" id="${option.Id}" onclick="getAddressDetail(event, this);"> ${option.Text} ${option.Description.includes("-") ? option.Description.substring(0, option.Description.lastIndexOf(" - ")) : option.Description}</div>`
+						);
+					}
+				});
+			});
+		}
+
+		function getAddressDetail(e, thisObj) {
+			let id = thisObj.id;
+			const query = `https://api.addressy.com/Capture/Interactive/Retrieve/v1.2/json3.ws?Key=TY78-BD75-NW81-XE97&Id=${id}`;
+			fetchData(query, (data) => {
+				const filteredOptions = data.Items;
+				filteredOptions.forEach((option) => {
+					$(".street").val(option.Line1)
+					$(".city-text").val(option.City)
+					$("#stateLabel").val(option.ProvinceName)
+					$(".state-dropdown").val(option.ProvinceCode).change();
+					$("#postalCode").val(option.PostalCode)
+					$("#county").val(option.AdminAreaName)
+					dropdownList.empty();
+				});
+			});
+		}
+
+		// Business Phone
+		var iti = window.intlTelInput(document.querySelector("#international_PhoneNumber_countrycode"), {
+			separateDialCode: false,
+			preferredCountries: ["US"],
+			allowDropdown: true,
+			hiddenInput: "full",
+			utilsScript: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.js"
+		});
+
+		// Mobile Phone
+		var iti1 = window.intlTelInput(document.querySelector("#international_PhoneNumber1_countrycode"), {
+			separateDialCode: false,
+			preferredCountries: ["US"],
+			allowDropdown: true,
+			hiddenInput: "full",
+			utilsScript: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.js"
+		});
+
+		document.addEventListener("keydown", function (event) {
+			if (event.key === "Enter") {
+				event.preventDefault(); // Prevent form from being submitted through enter key
+				zf_ValidateAndSubmit();
+			}
+		});
+	</script>
+	<!-- <script>
 		const dropdownList = $(".dropdown-list");
 		const addressInfo = $(".addressInfo");
 
@@ -572,7 +701,7 @@
 		// 	alert(full_number)
 
 		// });
-	</script>
+	</script> -->
 	<script>
 		$('form').submit(function () {
 			$('#zf-submitColor').prop('disabled', true);
