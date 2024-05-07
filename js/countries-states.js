@@ -278,6 +278,27 @@ var States = {
   SDN: {
     Khartoum: "Khartoum",
   },
+  CAN:{
+    Alberta:	"CA-AB",
+    "British Columbia":"CA-BC",
+    "Colombie-Britannique":	"CA-BC",
+    Manitoba:"CA-MB",
+    "New Brunswick":"CA-NB",
+    "Newfoundland and Labrador":"CA-NL",
+    "Northwest Territories":"CA-NT",
+    "Nouveau-Brunswick":"CA-NB",
+    "Nouvelle-Écosse":"CA-NS",
+    "Nova Scotia":"CA-NS",
+    Nunavut:"CA-NU",
+    Ontario:"CA-ON",
+    "Prince Edward Island":"CA-ON",
+    Quebec:"CA-QC",
+    Saskatchewan:"CA-SK",
+    "Terre-Neuve-et-Labrador":"CA-SK",
+    "Territoires du Nord-Ouest":"CA-NT",
+    Yukon:"CA-YT",
+    "Île-du-Prince-Édouard":"CA-PE"
+  },
   USA: {
     Alaska: "AK",
     Alabama: "AL",
@@ -347,7 +368,7 @@ var States = {
   },
 };
 
-var countriesWithState = ["ARE", "ESP", "IRQ", "POL", "SDN", "USA"];
+var countriesWithState = ["ARE", "ESP", "IRQ", "POL", "SDN", "USA","CAN"];
 
 var original_zf_MandArray = [
   "Name_First",
@@ -152733,6 +152754,8 @@ if (countySel.value == "USA") {
   //   // console.log(zf_MandArray);
   //   // }, 100); // Adjust the delay as needed
   // }
+
+  
 
   // Initial setup
   updateStateDropdown();
