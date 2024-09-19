@@ -164,7 +164,7 @@
 													value="" phoneFormat="1" isCountryCodeEnabled=false fieldType="11"
 													id="international_PhoneNumber_countrycode" valType="number"
 													phoneFormatType="1" placeholder="" autocomplete="off"
-													oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+													oninput="this.value = this.value.replace(/[^0-9+]/g, '')" />
 											</span>
 											<div class="zf-clearBoth"></div>
 										</div>
@@ -711,7 +711,14 @@
 		}
 
 		// Business Phone
-		var iti = window.intlTelInput(document.querySelector("#international_PhoneNumber_countrycode"), {
+		var iti1 = window.intlTelInput(document.querySelector("#international_PhoneNumber_countrycode"), {
+			separateDialCode: false,
+			preferredCountries: ["US"],
+			allowDropdown: true,
+			hiddenInput: "full",
+			utilsScript: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.js"
+		});
+		var iti1 = window.intlTelInput(document.querySelector("#international_PhoneNumber1_countrycode"), {
 			separateDialCode: false,
 			preferredCountries: ["US"],
 			allowDropdown: true,
@@ -719,7 +726,7 @@
 			utilsScript: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.js"
 		});
 
-		var input = document.querySelector("#international_PhoneNumber1_countrycode");
+		var input = document.querySelector("#international_PhoneNumber_countrycode");
 		input.addEventListener("input", function () {
 			// If "+" is removed, add it back
 			if (!input.value.startsWith("+")) {
@@ -752,7 +759,7 @@
 		});
 
 		// Event listener for country change
-		document.querySelector("#international_PhoneNumber1_countrycode").addEventListener("countrychange", function () {
+		document.querySelector("#international_PhoneNumber_countrycode").addEventListener("countrychange", function () {
 			var countySel = document.querySelector(".dropdown-countries");
 			var countryData = iti1.getSelectedCountryData();
 			var countryName = countryData.name;
@@ -762,8 +769,6 @@
 			var event = new Event("change");
 			countySel.dispatchEvent(event);
 		});
-
-
 		document.addEventListener("keydown", function (event) {
 			if (event.key === "Enter") {
 				event.preventDefault(); // Prevent form from being submitted through enter key
