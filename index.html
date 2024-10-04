@@ -725,15 +725,6 @@
 			hiddenInput: "full",
 			utilsScript: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.js"
 		});
-
-		var input = document.querySelector("#international_PhoneNumber_countrycode");
-		input.addEventListener("input", function () {
-			// If "+" is removed, add it back
-			if (!input.value.startsWith("+")) {
-				input.value = "+" + input.value.replace(/[^0-9]/g, ''); // Only allow digits after "+"
-			}
-		});
-
 		// Mobile Phone
 		var iti1 = window.intlTelInput(input, {
 			separateDialCode: false,
