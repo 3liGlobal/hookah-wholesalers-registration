@@ -690,7 +690,13 @@
 				});
 			});
 		}
-
+		var input = document.querySelector("#international_PhoneNumber_countrycode");
+		input.addEventListener("input", function () {
+			// If "+" is removed, add it back
+			if (!input.value.startsWith("+")) {
+				input.value = "+" + input.value.replace(/[^0-9]/g, ''); // Only allow digits after "+"
+			}
+		});
 		function getAddressDetail(e, thisObj) {
 			let id = thisObj.id;
 			const query = `https://api.addressy.com/Capture/Interactive/Retrieve/v1.2/json3.ws?Key=TY78-BD75-NW81-XE97&Id=${id}`;
@@ -755,16 +761,16 @@
 		});
 
 		// Event listener for country change
-    // document.querySelector("#international_PhoneNumber_countrycode").addEventListener("countrychange", function () {
-    //     var countySel = document.querySelector(".dropdown-countries");
-    //     var countryData = iti.getSelectedCountryData();
-    //     var countryName = countryData.name;
-    //     var iso2 = countryData.iso2.toUpperCase();
-    //     var iso3 = convert_ISO_3166_2_to_1[iso2] || "N/A";
-    //     countySel.value = iso3;
-    //     var event = new Event('change');
-    //     countySel.dispatchEvent(event);
-    //   });
+    document.querySelector("#international_PhoneNumber_countrycode").addEventListener("countrychange", function () {
+        var countySel = document.querySelector(".dropdown-countries");
+        var countryData = iti.getSelectedCountryData();
+        var countryName = countryData.name;
+        var iso2 = countryData.iso2.toUpperCase();
+        var iso3 = convert_ISO_3166_2_to_1[iso2] || "N/A";
+        countySel.value = iso3;
+        var event = new Event('change');
+        countySel.dispatchEvent(event);
+      });
 	</script>
 
 	<script>
